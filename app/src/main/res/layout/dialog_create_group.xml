@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Create Group Dialog Layout
-    Simple dialog with group name and emoji icon input.
--->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,14 +7,13 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Group Name Input -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Group name (e.g. Goa Trip)"
+        android:hint="Group name"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-        app:boxStrokeColor="@color/outline_variant"
         app:boxBackgroundColor="@color/surface_container_high"
+        app:boxStrokeColor="@color/outline_variant"
         app:hintTextColor="@color/on_surface_variant">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -26,19 +21,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapWords"
-            android:textColor="@color/on_surface" />
-
+            android:textColor="@color/on_surface"
+            android:hint="Goa Trip" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Group Icon Input -->
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:hint="Icon emoji (optional, e.g. 🏠)"
+        android:hint="Icon (optional)"
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-        app:boxStrokeColor="@color/outline_variant"
         app:boxBackgroundColor="@color/surface_container_high"
+        app:boxStrokeColor="@color/outline_variant"
         app:hintTextColor="@color/on_surface_variant">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -46,9 +40,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
+            android:maxLength="4"
             android:textColor="@color/on_surface"
-            android:maxLength="2" />
-
+            android:hint="G" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>

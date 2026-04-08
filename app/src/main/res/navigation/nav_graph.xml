@@ -35,6 +35,11 @@
             android:defaultValue="-1L" />
     </fragment>
 
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.smartsplit.app.ui.profile.ProfileFragment"
+        android:label="@string/nav_profile" />
+
     <!-- ── Group Detail ──────────────────────────────────────── -->
     <fragment
         android:id="@+id/groupDetailFragment"
@@ -55,12 +60,16 @@
             android:id="@+id/action_groupDetail_to_analytics"
             app:destination="@id/analyticsFragment"
             app:enterAnim="@anim/slide_in_up"
-            app:exitAnim="@anim/fade_out" />
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in_soft"
+            app:popExitAnim="@anim/slide_out_down" />
         <action
             android:id="@+id/action_groupDetail_to_debtSimplification"
             app:destination="@id/debtSimplificationFragment"
             app:enterAnim="@anim/slide_in_up"
-            app:exitAnim="@anim/fade_out" />
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in_soft"
+            app:popExitAnim="@anim/slide_out_down" />
     </fragment>
 
     <!-- ── Activity Log ──────────────────────────────────────── -->

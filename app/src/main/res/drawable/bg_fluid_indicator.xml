@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Floating crimson indicator circle for the Fluid Drop Nav Bar.
+    Simple radial gradient oval — icon is rendered on top by the ImageView inside the FrameLayout.
+    NOTE: layer-list item insets (top/left/bottom/right) only accept dp/px, NOT percentages.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <gradient
+        android:type="radial"
+        android:gradientRadius="100%p"
+        android:centerX="0.38"
+        android:centerY="0.32"
+        android:startColor="#FF6B7F"
+        android:centerColor="#D7263D"
+        android:endColor="#8B1020" />
+
+</shape>

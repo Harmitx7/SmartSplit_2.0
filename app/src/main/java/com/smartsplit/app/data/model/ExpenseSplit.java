@@ -3,15 +3,16 @@ package com.smartsplit.app.data.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
+import com.smartsplit.app.data.sync.SyncState;
+
+import java.util.UUID;
+
 /**
- * Stores how much each member owes in a given expense.
- * For EQUAL splits, all shares are equal.
- * For CUSTOM splits, each member's share is stored individually.
- *
- * This is the normalized split line-item table.
+ * Stores each member's share for an expense.
  */
 @Entity(
     tableName = "expense_splits",
@@ -20,7 +21,7 @@ import androidx.room.PrimaryKey;
             entity = Expense.class,
             parentColumns = "id",
             childColumns = "expense_id",
-            onDelete = ForeignKey.CASCADE  // Deleting expense removes all its split records
+            onDelete = ForeignKey.CASCADE
         ),
         @ForeignKey(
             entity = Member.class,
@@ -42,13 +43,38 @@ public class ExpenseSplit {
     @ColumnInfo(name = "member_id")
     public long memberId;
 
-    /** This member's share of the expense in paise */
     @ColumnInfo(name = "share_paise")
     public long sharePaise;
 
+    @ColumnInfo(name = "created_at", defaultValue = "0")
+    public long createdAt;
+
+    @ColumnInfo(name = "updated_at", defaultValue = "0")
+    public long updatedAt;
+
+    @ColumnInfo(name = "client_uuid", defaultValue = "''")
+    public String clientUuid;
+
+    @ColumnInfo(name = "remote_id")
+    public String remoteId;
+
+    @ColumnInfo(name = "sync_state", defaultValue = "'PENDING'")
+    public String syncState;
+
+    public ExpenseSplit() {
+        // Room constructor.
+    }
+
+    @Ignore
     public ExpenseSplit(long expenseId, long memberId, long sharePaise) {
+        long now = System.currentTimeMillis();
         this.expenseId = expenseId;
         this.memberId = memberId;
         this.sharePaise = sharePaise;
+        this.createdAt = now;
+        this.updatedAt = now;
+        this.clientUuid = UUID.randomUUID().toString();
+        this.remoteId = null;
+        this.syncState = SyncState.PENDING;
     }
 }

@@ -4,12 +4,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.smartsplit.app.R;
@@ -19,7 +17,7 @@ import com.smartsplit.app.data.db.AppDatabase;
 import com.smartsplit.app.data.model.Member;
 import com.smartsplit.app.data.model.SettlementTransaction;
 import com.smartsplit.app.databinding.FragmentDebtSimplificationBinding;
-import com.smartsplit.app.ui.viewmodel.GroupViewModel;
+import com.smartsplit.app.ui.motion.IosMotion;
 
 import java.util.List;
 import java.util.Map;
@@ -59,13 +57,11 @@ public class DebtSimplificationFragment extends Fragment {
         adapter = new SimplifiedTransactionAdapter();
         binding.rvTransactions.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvTransactions.setAdapter(adapter);
-
-        // Animate list in
-        binding.rvTransactions.setLayoutAnimation(
-            AnimationUtils.loadLayoutAnimation(requireContext(), R.anim.layout_slide_from_bottom)
-        );
+        IosMotion.applyListLayoutAnimation(binding.rvTransactions);
 
         binding.btnBack.setOnClickListener(v -> requireActivity().onBackPressed());
+        IosMotion.applyPressFeedback(binding.btnBack);
+        playEntranceMotion();
 
         loadAndSimplify(groupId);
     }
@@ -108,6 +104,7 @@ public class DebtSimplificationFragment extends Fragment {
 
         adapter.submitList(transactions);
         binding.rvTransactions.scheduleLayoutAnimation();
+        IosMotion.animateIn(binding.contentGroup, 40);
     }
 
     private void showAllClearState() {
@@ -115,6 +112,12 @@ public class DebtSimplificationFragment extends Fragment {
         binding.emptyState.setVisibility(View.VISIBLE);
         binding.lottieSuccess.setAnimation(R.raw.lottie_success);
         binding.lottieSuccess.playAnimation();
+        IosMotion.animateIn(binding.emptyState, 40);
+    }
+
+    private void playEntranceMotion() {
+        IosMotion.animateIn(binding.btnBack, 0);
+        IosMotion.animateIn(binding.contentGroup, 90);
     }
 
     @Override

@@ -2,15 +2,18 @@ package com.smartsplit.app.ui.viewmodel;
 
 import android.app.Application;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.smartsplit.app.core.BalanceEngine;
+import com.smartsplit.app.core.SplitValidation;
 import com.smartsplit.app.data.dao.ExpenseSplitDao;
 import com.smartsplit.app.data.model.Expense;
 import com.smartsplit.app.data.model.ExpenseSplit;
 import com.smartsplit.app.data.model.Group;
+import com.smartsplit.app.data.model.GroupSummary;
 import com.smartsplit.app.data.model.Member;
 import com.smartsplit.app.data.model.SettlementTransaction;
 import com.smartsplit.app.data.repository.SmartSplitRepository;
@@ -18,25 +21,31 @@ import com.smartsplit.app.data.repository.SmartSplitRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * ViewModel for Group-related screens (GroupDetail, Balances).
- * Owns the group state and coordinates between the repository and UI.
+ * ViewModel for group, balances, and expense flows.
  */
 public class GroupViewModel extends AndroidViewModel {
 
     private final SmartSplitRepository repository;
+    private final ExecutorService settlementExecutor = Executors.newSingleThreadExecutor();
+    private final Map<Long, MutableLiveData<List<SettlementTransaction>>> settlementsByGroup = new ConcurrentHashMap<>();
+    private final MutableLiveData<String> operationError = new MutableLiveData<>();
 
-    private final MutableLiveData<List<SettlementTransaction>> settlements = new MutableLiveData<>();
-
-    public GroupViewModel(Application application) {
+    public GroupViewModel(@NonNull Application application) {
         super(application);
         repository = new SmartSplitRepository(application);
     }
 
     public LiveData<List<Group>> getAllGroups() {
         return repository.getAllGroups();
+    }
+
+    public LiveData<List<GroupSummary>> getGroupSummaries() {
+        return repository.getGroupSummaries();
     }
 
     public LiveData<Group> getGroupById(long groupId) {
@@ -55,12 +64,21 @@ public class GroupViewModel extends AndroidViewModel {
         return repository.getTotalSpendForGroup(groupId);
     }
 
-    /** Exposes the computed settlements list for the BalancesFragment to observe */
-    public LiveData<List<SettlementTransaction>> getSettlements() {
-        return settlements;
+    public LiveData<String> getOperationError() {
+        return operationError;
     }
 
-    // ─── Write Operations ──────────────────────────────────────────────
+    public void clearOperationError() {
+        operationError.setValue(null);
+    }
+
+    public LiveData<List<SettlementTransaction>> getSettlementsForGroup(long groupId) {
+        MutableLiveData<List<SettlementTransaction>> target = getOrCreateSettlementsLiveData(groupId);
+        if (target.getValue() == null) {
+            target.setValue(new ArrayList<>());
+        }
+        return target;
+    }
 
     public void createGroup(String name, String icon, String createdByUid) {
         Group group = new Group(name, icon, System.currentTimeMillis(), createdByUid);
@@ -73,64 +91,79 @@ public class GroupViewModel extends AndroidViewModel {
 
     public void addMember(long groupId, String memberName) {
         Member member = new Member(groupId, memberName, null);
-        repository.insertMember(member);
+        repository.insertMember(member, () -> computeSettlementsForGroup(groupId));
     }
 
-    /**
-     * Adds a new expense and automatically splits it among participants.
-     *
-     * @param groupId     The group this expense belongs to.
-     * @param title       The expense description.
-     * @param amountPaise Total amount in smallest unit (paise).
-     * @param paidByMemberId The member who paid.
-     * @param participantIds List of member IDs splitting this expense.
-     * @param splitType   "EQUAL" or "CUSTOM".
-     * @param customShares Optional map of memberId → share amount for CUSTOM splits.
-     */
-    public void addExpenseEqual(long groupId, String title, long amountPaise,
-                                long paidByMemberId, List<Long> participantIds) {
-        if (participantIds == null || participantIds.isEmpty()) return;
-
-        Expense expense = new Expense(groupId, title, amountPaise,
-                paidByMemberId, System.currentTimeMillis(), "EQUAL");
-
-        // Distribute evenly: handle remainder cents by giving them to the first participant
-        long share = amountPaise / participantIds.size();
-        long remainder = amountPaise % participantIds.size();
-
-        List<ExpenseSplit> splits = new ArrayList<>();
-        for (int i = 0; i < participantIds.size(); i++) {
-            long thisShare = (i == 0) ? share + remainder : share;
-            splits.add(new ExpenseSplit(0L, participantIds.get(i), thisShare));
+    public boolean addExpenseEqual(long groupId, String title, long amountPaise,
+                                   long paidByMemberId, List<Long> participantIds) {
+        SplitValidation.ValidationResult validation =
+            SplitValidation.validateEqualSplit(amountPaise, paidByMemberId, participantIds);
+        if (!validation.valid) {
+            operationError.postValue(validation.errorMessage);
+            return false;
         }
 
-        repository.insertExpenseWithSplits(expense, splits);
+        Expense expense = new Expense(
+            groupId,
+            title,
+            amountPaise,
+            paidByMemberId,
+            System.currentTimeMillis(),
+            "EQUAL"
+        );
+
+        List<ExpenseSplit> splits = SplitValidation.toExpenseSplits(validation.normalizedShares);
+        repository.insertExpenseWithSplits(expense, splits, () -> computeSettlementsForGroup(groupId));
+        return true;
     }
 
-    public void addExpenseCustom(long groupId, String title, long amountPaise,
-                                  long paidByMemberId, Map<Long, Long> memberSharesMap) {
-        Expense expense = new Expense(groupId, title, amountPaise,
-                paidByMemberId, System.currentTimeMillis(), "CUSTOM");
-
-        List<ExpenseSplit> splits = new ArrayList<>();
-        for (Map.Entry<Long, Long> entry : memberSharesMap.entrySet()) {
-            splits.add(new ExpenseSplit(0L, entry.getKey(), entry.getValue()));
+    public boolean addExpenseCustom(long groupId, String title, long amountPaise,
+                                    long paidByMemberId, Map<Long, Long> memberSharesMap) {
+        SplitValidation.ValidationResult validation =
+            SplitValidation.validateCustomSplit(amountPaise, paidByMemberId, memberSharesMap);
+        if (!validation.valid) {
+            operationError.postValue(validation.errorMessage);
+            return false;
         }
 
-        repository.insertExpenseWithSplits(expense, splits);
+        Expense expense = new Expense(
+            groupId,
+            title,
+            amountPaise,
+            paidByMemberId,
+            System.currentTimeMillis(),
+            "CUSTOM"
+        );
+
+        List<ExpenseSplit> splits = SplitValidation.toExpenseSplits(validation.normalizedShares);
+        repository.insertExpenseWithSplits(expense, splits, () -> computeSettlementsForGroup(groupId));
+        return true;
     }
 
-    /**
-     * Computes the minimal settlements for a group on a background thread,
-     * then posts the result to the settlements LiveData for the UI to observe.
-     */
-    public void computeSettlements(long groupId) {
-        Executors.newSingleThreadExecutor().execute(() -> {
+    public void computeSettlementsForGroup(long groupId) {
+        MutableLiveData<List<SettlementTransaction>> target = getOrCreateSettlementsLiveData(groupId);
+        settlementExecutor.execute(() -> {
             List<ExpenseSplitDao.MemberBalance> rawBalances = repository.getNetBalancesSync(groupId);
             List<Member> members = repository.getMembersForGroupSync(groupId);
             Map<Long, Member> memberMap = BalanceEngine.buildMemberMap(members);
             List<SettlementTransaction> computed = BalanceEngine.minimize(rawBalances, memberMap);
-            settlements.postValue(computed);
+            target.postValue(computed);
         });
+    }
+
+    private MutableLiveData<List<SettlementTransaction>> getOrCreateSettlementsLiveData(long groupId) {
+        MutableLiveData<List<SettlementTransaction>> existing = settlementsByGroup.get(groupId);
+        if (existing != null) {
+            return existing;
+        }
+        MutableLiveData<List<SettlementTransaction>> created = new MutableLiveData<>(new ArrayList<>());
+        settlementsByGroup.put(groupId, created);
+        return created;
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        settlementExecutor.shutdown();
     }
 }

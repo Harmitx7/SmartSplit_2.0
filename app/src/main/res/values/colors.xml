@@ -1,78 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- ── Surface / Background (Slate Dark) ──────────────────── -->
-    <color name="surface">#FF111115</color>
-    <color name="surface_dim">#FF111115</color>
-    <color name="surface_container">#FF1C1C24</color>
-    <color name="surface_container_low">#FF16161C</color>
-    <color name="surface_container_high">#FF22222B</color>
-    <color name="surface_container_highest">#FF2A2A35</color>
-    <color name="surface_bright">#FF2A2A3A</color>
-    <color name="surface_variant">#FF1C1C24</color>
+    <!-- Nights-inspired deep dark surfaces -->
+    <color name="surface">#02182B</color>
+    <color name="surface_dim">#010C16</color>
+    <color name="surface_container">#0A1F35</color>
+    <color name="surface_container_low">#051320</color>
+    <color name="surface_container_high">#0F253C</color>
+    <color name="surface_container_highest">#162D46</color>
+    <color name="surface_bright">#0E2A47</color>
+    <color name="surface_variant">#1E293B</color>
 
-    <!-- ── Primary (Neon Magenta) ─────────────────────────────── -->
-    <color name="primary">#FFF655FF</color>
-    <color name="primary_dim">#FFD933DB</color>
-    <color name="primary_fixed">#FFF655FF</color>
-    <color name="primary_fixed_dim">#FFC822C9</color>
-    <color name="primary_container">#FF4D004C</color>
-    <color name="on_primary">#FFFFFFFF</color>
-    <color name="on_primary_container">#FFFFB3F9</color>
-    <color name="on_primary_fixed">#FF000000</color>
-    <color name="on_primary_fixed_variant">#FF51005D</color>
-    <color name="inverse_primary">#FFA300BB</color>
+    <!-- Crimson accent palette -->
+    <color name="primary">#D7263D</color>
+    <color name="primary_dim">#B21E32</color>
+    <color name="primary_fixed">#D7263D</color>
+    <color name="primary_fixed_dim">#B21E32</color>
+    <color name="primary_container">#3D0A11</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_primary_container">#FFD8DC</color>
+    <color name="on_primary_fixed">#FFFFFF</color>
+    <color name="on_primary_fixed_variant">#FFD8DC</color>
+    <color name="inverse_primary">#FF4D64</color>
 
-    <!-- ── Secondary (Neon Cyan) ──────────────────────────────── -->
-    <color name="secondary">#FF00E5FF</color>
-    <color name="secondary_dim">#FF00C4DB</color>
-    <color name="secondary_fixed">#FF00E5FF</color>
-    <color name="secondary_fixed_dim">#FF00B2C9</color>
-    <color name="secondary_container">#FF00444D</color>
-    <color name="on_secondary">#FF000000</color>
-    <color name="on_secondary_container">#FFB3F9FF</color>
-    <color name="on_secondary_fixed">#FF003A43</color>
-    <color name="on_secondary_fixed_variant">#FF005966</color>
+    <color name="secondary">#FF34C759</color>
+    <color name="secondary_dim">#FF28A647</color>
+    <color name="secondary_fixed">#FF34C759</color>
+    <color name="secondary_fixed_dim">#FF28A647</color>
+    <color name="secondary_container">#FFE3F8EA</color>
+    <color name="on_secondary">#FFFFFFFF</color>
+    <color name="on_secondary_container">#FF0C3B1A</color>
+    <color name="on_secondary_fixed">#FFFFFFFF</color>
+    <color name="on_secondary_fixed_variant">#FF0C3B1A</color>
 
-    <!-- ── Tertiary (Vivid Green) ─────────────────────────────── -->
-    <color name="tertiary">#FF00E676</color>
-    <color name="tertiary_dim">#FF00C462</color>
-    <color name="tertiary_fixed">#FF00E676</color>
-    <color name="tertiary_fixed_dim">#FF00B55A</color>
-    <color name="tertiary_container">#FF004B26</color>
-    <color name="on_tertiary">#FF000000</color>
-    <color name="on_tertiary_container">#FF99FFB1</color>
-    <color name="on_tertiary_fixed">#FF004A22</color>
-    <color name="on_tertiary_fixed_variant">#FF006A34</color>
+    <color name="tertiary">#FFFF9F0A</color>
+    <color name="tertiary_dim">#FFD88600</color>
+    <color name="tertiary_fixed">#FFFF9F0A</color>
+    <color name="tertiary_fixed_dim">#FFD88600</color>
+    <color name="tertiary_container">#FFFFF1DE</color>
+    <color name="on_tertiary">#FFFFFFFF</color>
+    <color name="on_tertiary_container">#FF4A2D00</color>
+    <color name="on_tertiary_fixed">#FFFFFFFF</color>
+    <color name="on_tertiary_fixed_variant">#FF4A2D00</color>
 
-    <!-- ── Error ──────────────────────────────────────────────── -->
-    <color name="error">#FFFF6E84</color>
-    <color name="error_dim">#FFD73357</color>
-    <color name="error_container">#FFA70138</color>
-    <color name="on_error">#FF490013</color>
-    <color name="on_error_container">#FFFFB2B9</color>
+    <color name="error">#FFFF3B30</color>
+    <color name="error_dim">#FFD92D20</color>
+    <color name="error_container">#FFFFE8E6</color>
+    <color name="on_error">#FFFFFFFF</color>
+    <color name="on_error_container">#FF5C120B</color>
 
-    <!-- ── On-Surface Text Colors ─────────────────────────────── -->
-    <color name="on_surface">#FFFFFFFF</color>
-    <color name="on_background">#FFFFFFFF</color>
-    <color name="on_surface_variant">#FF888A96</color>
-    <color name="inverse_surface">#FFF9F9FF</color>
-    <color name="inverse_on_surface">#FF53555A</color>
+    <color name="on_surface">#F8FAFC</color>
+    <color name="on_background">#F8FAFC</color>
+    <color name="on_surface_variant">#94A3B8</color>
+    <color name="inverse_surface">#F8FAFC</color>
+    <color name="inverse_on_surface">#02182B</color>
 
-    <!-- ── Outline ────────────────────────────────────────────── -->
-    <color name="outline">#FF444655</color>
-    <color name="outline_variant">#FF2A2C3A</color>
+    <color name="outline">#334155</color>
+    <color name="outline_variant">#1E293B</color>
 
-    <!-- ── UI/UX Pro Max Surface Colors ───────────────────────── -->
-    <color name="glass_surface_40">#331C1C24</color>
-    <color name="glass_surface_60">#661C1C24</color>
-    <color name="glass_login_card">#FF1C1C24</color> <!-- Solid dark cards instead of glass -->
-    <color name="glass_nav">#FF111115</color> <!-- Solid dark nav -->
+    <!-- Transparent card layers -->
+    <!-- Glass and Glow effects -->
+    <color name="glass_surface_40">#6602182B</color>
+    <color name="glass_surface_60">#9902182B</color>
+    <color name="glass_login_card">#CC0A1F35</color>
+    <color name="glass_nav">#CC02182B</color>
 
-    <!-- ── Glow Shadow Colors ─────────────────────────────────── -->
-    <color name="glow_primary">#66F655FF</color>
-    <color name="glow_secondary">#6600E5FF</color>
-    <color name="glow_tertiary">#6600E676</color>
+    <color name="glow_primary">#40D7263D</color>
+    <color name="glow_secondary">#4034C759</color>
+    <color name="glow_tertiary">#40FFA500</color>
 
-    <!-- ── Surface tint ──────────────────────────────────────── -->
-    <color name="surface_tint">#FFF655FF</color>
+    <color name="surface_tint">#D7263D</color>
 </resources>

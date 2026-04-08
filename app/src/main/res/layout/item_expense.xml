@@ -1,49 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    item_expense.xml — UI/UX Pro Max Overhaul
-    Shows: category icon glow | title | date | paid_by | amount
--->
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="12dp"
-    android:clickable="true"
-    android:focusable="true"
-    android:stateListAnimator="@animator/scale_button_press"
+    android:layout_marginBottom="10dp"
     app:cardBackgroundColor="@color/surface_container"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="0dp">
+    app:cardCornerRadius="14dp"
+    app:cardElevation="1dp"
+    app:strokeColor="@color/outline_variant"
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="12dp">
 
-        <!-- Category Icon Glow -->
-        <FrameLayout
-            android:layout_width="46dp"
-            android:layout_height="46dp"
-            android:background="@drawable/bg_icon_glow_secondary">
+        <TextView
+            android:id="@+id/tv_category_emoji"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:gravity="center"
+            android:background="@drawable/bg_icon_glow_primary"
+            android:textColor="@color/primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:text="D" />
 
-            <TextView
-                android:id="@+id/tv_category_emoji"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="22sp"
-                tools:text="🍕" />
-        </FrameLayout>
-
-        <!-- Expense Info -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -51,25 +41,21 @@
                 android:id="@+id/tv_expense_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/space_grotesk"
-                android:maxLines="1"
                 android:textColor="@color/on_surface"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="Pizza Night" />
+                tools:text="Dinner" />
 
             <TextView
                 android:id="@+id/tv_paid_by"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:fontFamily="@font/plus_jakarta_sans"
+                android:layout_marginTop="2dp"
                 android:textColor="@color/on_surface_variant"
                 android:textSize="12sp"
                 tools:text="Paid by Alice" />
         </LinearLayout>
 
-        <!-- Amount Right-aligned -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,21 +66,21 @@
                 android:id="@+id/tv_expense_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/space_grotesk"
-                android:textColor="@color/primary"
+                android:textColor="@color/on_surface"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="$48.00" />
+                tools:text="640.00" />
 
             <TextView
                 android:id="@+id/tv_expense_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:fontFamily="@font/plus_jakarta_sans"
+                android:layout_marginTop="2dp"
                 android:textColor="@color/on_surface_variant"
                 android:textSize="11sp"
-                tools:text="Apr 7" />
+                tools:text="Today" />
+
         </LinearLayout>
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+
+</com.google.android.material.card.MaterialCardView>

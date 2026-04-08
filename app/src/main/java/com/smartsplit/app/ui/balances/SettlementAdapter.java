@@ -16,6 +16,8 @@ import com.smartsplit.app.databinding.ItemSettlementBinding;
  */
 public class SettlementAdapter extends ListAdapter<SettlementTransaction, SettlementAdapter.SettlementViewHolder> {
 
+    private int lastAnimatedPosition = -1;
+
     public SettlementAdapter() {
         super(DIFF_CALLBACK);
     }
@@ -44,6 +46,25 @@ public class SettlementAdapter extends ListAdapter<SettlementTransaction, Settle
     @Override
     public void onBindViewHolder(@NonNull SettlementViewHolder holder, int position) {
         holder.bind(getItem(position));
+        animateRow(holder, position);
+    }
+
+    private void animateRow(@NonNull SettlementViewHolder holder, int position) {
+        if (position <= lastAnimatedPosition) {
+            holder.itemView.setAlpha(1f);
+            holder.itemView.setTranslationY(0f);
+            return;
+        }
+
+        holder.itemView.setAlpha(0f);
+        holder.itemView.setTranslationY(20f);
+        holder.itemView.animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setStartDelay(Math.min(position, 6) * 18L)
+            .setDuration(340)
+            .start();
+        lastAnimatedPosition = position;
     }
 
     static class SettlementViewHolder extends RecyclerView.ViewHolder {

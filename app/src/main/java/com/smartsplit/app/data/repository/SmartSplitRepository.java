@@ -2,6 +2,7 @@ package com.smartsplit.app.data.repository;
 
 import android.app.Application;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 
 import com.smartsplit.app.data.dao.ExpenseDao;
@@ -12,16 +13,18 @@ import com.smartsplit.app.data.db.AppDatabase;
 import com.smartsplit.app.data.model.Expense;
 import com.smartsplit.app.data.model.ExpenseSplit;
 import com.smartsplit.app.data.model.Group;
+import com.smartsplit.app.data.model.GroupSummary;
 import com.smartsplit.app.data.model.Member;
+import com.smartsplit.app.data.sync.NoOpSyncGateway;
+import com.smartsplit.app.data.sync.SyncEntityMapper;
+import com.smartsplit.app.data.sync.SyncGateway;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Single source of truth for all data in SmartSplit.
- * The Repository abstracts the data source from ViewModels.
- * All database writes happen on a background thread via ExecutorService.
+ * Single source of truth for local data with a sync-ready seam.
  */
 public class SmartSplitRepository {
 
@@ -29,25 +32,29 @@ public class SmartSplitRepository {
     private final MemberDao memberDao;
     private final ExpenseDao expenseDao;
     private final ExpenseSplitDao expenseSplitDao;
+    private final SyncGateway syncGateway;
 
-    /**
-     * Single-threaded executor for sequential DB writes.
-     * Single thread avoids concurrency issues with SQLite.
-     */
     private final ExecutorService dbWriteExecutor = Executors.newSingleThreadExecutor();
 
     public SmartSplitRepository(Application application) {
-        AppDatabase db = AppDatabase.getInstance(application);
-        groupDao = db.groupDao();
-        memberDao = db.memberDao();
-        expenseDao = db.expenseDao();
-        expenseSplitDao = db.expenseSplitDao();
+        this(application, new NoOpSyncGateway());
     }
 
-    // ─── Group Operations ──────────────────────────────────────────────
+    public SmartSplitRepository(Application application, SyncGateway syncGateway) {
+        AppDatabase db = AppDatabase.getInstance(application);
+        this.groupDao = db.groupDao();
+        this.memberDao = db.memberDao();
+        this.expenseDao = db.expenseDao();
+        this.expenseSplitDao = db.expenseSplitDao();
+        this.syncGateway = syncGateway;
+    }
 
     public LiveData<List<Group>> getAllGroups() {
         return groupDao.getAllGroups();
+    }
+
+    public LiveData<List<GroupSummary>> getGroupSummaries() {
+        return groupDao.getGroupSummaries();
     }
 
     public LiveData<Group> getGroupById(long id) {
@@ -55,28 +62,48 @@ public class SmartSplitRepository {
     }
 
     public void insertGroup(Group group) {
-        dbWriteExecutor.execute(() -> groupDao.insertGroup(group));
+        insertGroup(group, null);
+    }
+
+    public void insertGroup(Group group, @Nullable Runnable onComplete) {
+        dbWriteExecutor.execute(() -> {
+            group.updatedAt = System.currentTimeMillis();
+            groupDao.insertGroup(group);
+            syncGateway.enqueueUpsert(SyncEntityMapper.toRecord(group));
+            runCompletion(onComplete);
+        });
     }
 
     public void deleteGroup(Group group) {
-        dbWriteExecutor.execute(() -> groupDao.deleteGroup(group));
+        dbWriteExecutor.execute(() -> {
+            groupDao.deleteGroup(group);
+            syncGateway.enqueueDelete(SyncEntityMapper.ENTITY_GROUP, group.clientUuid, System.currentTimeMillis());
+        });
     }
-
-    // ─── Member Operations ─────────────────────────────────────────────
 
     public LiveData<List<Member>> getMembersForGroup(long groupId) {
         return memberDao.getMembersForGroup(groupId);
     }
 
     public void insertMember(Member member) {
-        dbWriteExecutor.execute(() -> memberDao.insertMember(member));
+        insertMember(member, null);
+    }
+
+    public void insertMember(Member member, @Nullable Runnable onComplete) {
+        dbWriteExecutor.execute(() -> {
+            member.updatedAt = System.currentTimeMillis();
+            memberDao.insertMember(member);
+            syncGateway.enqueueUpsert(SyncEntityMapper.toRecord(member));
+            runCompletion(onComplete);
+        });
     }
 
     public void deleteMember(Member member) {
-        dbWriteExecutor.execute(() -> memberDao.deleteMember(member));
+        dbWriteExecutor.execute(() -> {
+            memberDao.deleteMember(member);
+            syncGateway.enqueueDelete(SyncEntityMapper.ENTITY_MEMBER, member.clientUuid, System.currentTimeMillis());
+        });
     }
-
-    // ─── Expense Operations ────────────────────────────────────────────
 
     public LiveData<List<Expense>> getExpensesForGroup(long groupId) {
         return expenseDao.getExpensesForGroup(groupId);
@@ -86,32 +113,41 @@ public class SmartSplitRepository {
         return expenseDao.getTotalSpendForGroup(groupId);
     }
 
-    /**
-     * Inserts an expense AND its split lines atomically on a background thread.
-     * This ensures the database is never in a partial state (expense with no splits).
-     */
     public void insertExpenseWithSplits(Expense expense, List<ExpenseSplit> splits) {
+        insertExpenseWithSplits(expense, splits, null);
+    }
+
+    public void insertExpenseWithSplits(Expense expense, List<ExpenseSplit> splits, @Nullable Runnable onComplete) {
         dbWriteExecutor.execute(() -> {
+            expense.updatedAt = System.currentTimeMillis();
             long expenseId = expenseDao.insertExpense(expense);
-            // Assign the generated expenseId to each split before inserting
+            expense.id = expenseId;
+            syncGateway.enqueueUpsert(SyncEntityMapper.toRecord(expense));
+
             for (ExpenseSplit split : splits) {
                 split.expenseId = expenseId;
+                split.updatedAt = System.currentTimeMillis();
             }
             expenseSplitDao.insertSplits(splits);
+            for (ExpenseSplit split : splits) {
+                syncGateway.enqueueUpsert(SyncEntityMapper.toRecord(split));
+            }
+
+            runCompletion(onComplete);
         });
     }
 
-    // ─── Balance Calculation ───────────────────────────────────────────
-
-    /**
-     * Returns raw net-balance data from DB (synchronous, must be called on background thread).
-     * Used by GroupViewModel to feed into BalanceEngine.
-     */
     public List<ExpenseSplitDao.MemberBalance> getNetBalancesSync(long groupId) {
         return expenseSplitDao.getNetBalancesForGroup(groupId);
     }
 
     public List<Member> getMembersForGroupSync(long groupId) {
         return memberDao.getMembersForGroupSync(groupId);
+    }
+
+    private void runCompletion(@Nullable Runnable onComplete) {
+        if (onComplete != null) {
+            onComplete.run();
+        }
     }
 }

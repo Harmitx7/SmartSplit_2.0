@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    fragment_group_detail.xml — UI/UX Pro Max Overhaul
-    Header: solid dark card + icon + stats
-    Action buttons: Analytics and Simplify Debts
-    Expenses: list with Lottie empty state
--->
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,78 +7,65 @@
     android:layout_height="match_parent"
     android:background="@color/surface">
 
-    <!-- Atmospheric radial gradient background (replacing orb) -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_gravity="top"
-        android:background="#15151A" />
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingBottom="100dp">
+        android:padding="16dp"
+        android:paddingBottom="110dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:orientation="vertical">
 
-            <!-- ── Back Button ─────────────────────────────────── -->
             <ImageButton
                 android:id="@+id/btn_back"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/bg_card_dark"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_glass_card"
                 android:contentDescription="@string/cd_back_button"
                 android:padding="8dp"
                 android:src="@drawable/ic_arrow_back"
                 app:tint="@color/on_surface" />
 
-            <!-- ── Group Header Solid Card ─────────────────────── -->
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="12dp"
                 app:cardBackgroundColor="@color/surface_container"
-                app:cardCornerRadius="28dp"
-                app:cardElevation="0dp">
+                app:cardCornerRadius="20dp"
+                app:cardElevation="1dp"
+                app:strokeColor="@color/outline_variant"
+                app:strokeWidth="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="24dp">
+                    android:padding="16dp">
 
-                    <!-- Icon + Name Row -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
 
-                        <FrameLayout
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:background="@drawable/bg_icon_glow_primary">
-
-                            <TextView
-                                android:id="@+id/tv_group_icon"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:textSize="28sp"
-                                tools:text="🏠" />
-                        </FrameLayout>
+                        <TextView
+                            android:id="@+id/tv_group_icon"
+                            android:layout_width="52dp"
+                            android:layout_height="52dp"
+                            android:gravity="center"
+                            android:background="@drawable/bg_icon_glow"
+                            android:textColor="@color/primary"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            tools:text="G" />
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginStart="12dp"
                             android:layout_weight="1"
                             android:orientation="vertical">
 
@@ -92,19 +73,16 @@
                                 android:id="@+id/tv_group_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/space_grotesk"
                                 android:textColor="@color/on_surface"
-                                android:textSize="22sp"
+                                android:textSize="24sp"
                                 android:textStyle="bold"
-                                tools:text="House Expenses" />
+                                tools:text="Apartment" />
 
                             <TextView
                                 android:id="@+id/tv_member_names"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/plus_jakarta_sans"
                                 android:maxLines="2"
                                 android:textColor="@color/on_surface_variant"
                                 android:textSize="13sp"
@@ -112,212 +90,170 @@
                         </LinearLayout>
                     </LinearLayout>
 
-                    <!-- Stats Row -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="14dp"
                         android:orientation="horizontal"
                         android:weightSum="2">
 
-                        <!-- Total Spend -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_card_dark"
+                            android:background="@drawable/bg_glass_card"
                             android:orientation="vertical"
-                            android:padding="14dp">
+                            android:padding="12dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/plus_jakarta_sans"
                                 android:text="Total Spend"
                                 android:textColor="@color/on_surface_variant"
-                                android:textSize="10sp"
-                                android:letterSpacing="0.1"
-                                android:textAllCaps="true" />
+                                android:textSize="11sp" />
 
                             <TextView
                                 android:id="@+id/tv_total_spend"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:fontFamily="@font/space_grotesk"
-                                android:textColor="@color/secondary"
+                                android:textColor="@color/on_surface"
                                 android:textSize="20sp"
                                 android:textStyle="bold"
-                                tools:text="$240.00" />
+                                tools:text="2,440.00" />
                         </LinearLayout>
 
-                        <!-- Members count -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:background="@drawable/bg_card_dark"
+                            android:background="@drawable/bg_glass_card"
                             android:orientation="vertical"
-                            android:padding="14dp">
+                            android:padding="12dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/plus_jakarta_sans"
                                 android:text="Members"
                                 android:textColor="@color/on_surface_variant"
-                                android:textSize="10sp"
-                                android:letterSpacing="0.1"
-                                android:textAllCaps="true" />
+                                android:textSize="11sp" />
 
                             <TextView
                                 android:id="@+id/tv_member_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:fontFamily="@font/space_grotesk"
-                                android:textColor="@color/primary"
+                                android:textColor="@color/on_surface"
                                 android:textSize="20sp"
                                 android:textStyle="bold"
                                 tools:text="4" />
                         </LinearLayout>
+
                     </LinearLayout>
 
-                    <!-- Divider -->
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="16dp"
-                        android:background="@color/outline_variant" />
-
-                    <!-- Add Member -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_add_member"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/space_grotesk"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="14dp"
                         android:text="@string/add_member"
-                        android:textColor="@color/on_surface"
-                        app:cornerRadius="14dp"
-                        app:strokeColor="@color/outline"
+                        android:textAllCaps="false"
+                        app:backgroundTint="@color/primary"
+                        app:cornerRadius="12dp"
                         app:icon="@drawable/ic_add"
-                        app:iconTint="@color/on_surface" />
+                        app:iconTint="@color/on_primary"
+                        android:textColor="@color/on_primary" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <!-- ── Action Buttons Row ──────────────────────────── -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
                 android:orientation="horizontal"
                 android:weightSum="2">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_view_analytics"
-                    style="@style/Widget.Material3.Button.TonalButton"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_height="44dp"
+                    android:layout_marginEnd="6dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/space_grotesk"
                     android:text="@string/view_analytics"
-                    android:textColor="@color/secondary"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    app:backgroundTint="#1A00E5FF"
-                    app:cornerRadius="50dp"
+                    android:textAllCaps="false"
+                    app:backgroundTint="@color/primary_container"
+                    app:cornerRadius="12dp"
                     app:icon="@drawable/ic_insights"
-                    app:iconTint="@color/secondary" />
+                    app:iconTint="@color/primary"
+                    android:textColor="@color/primary" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_simplify_debts"
-                    style="@style/Widget.Material3.Button.TonalButton"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="6dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/space_grotesk"
                     android:text="@string/simplify_debts"
-                    android:textColor="@color/tertiary"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    app:backgroundTint="#1A00E676"
-                    app:cornerRadius="50dp"
+                    android:textAllCaps="false"
+                    app:backgroundTint="@color/secondary_container"
+                    app:cornerRadius="12dp"
                     app:icon="@drawable/ic_wallet"
-                    app:iconTint="@color/tertiary" />
+                    app:iconTint="@color/secondary"
+                    android:textColor="@color/secondary" />
             </LinearLayout>
 
-            <!-- ── Expenses Section ───────────────────────────── -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="@font/space_grotesk"
+                android:layout_marginTop="18dp"
                 android:text="@string/expenses"
                 android:textColor="@color/on_surface"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium" />
 
-            <!-- Empty state -->
             <LinearLayout
                 android:id="@+id/ll_no_expenses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="32dp"
+                android:padding="20dp"
                 android:visibility="gone">
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:layout_width="160dp"
-                    android:layout_height="160dp"
-                    android:contentDescription="@string/cd_lottie_empty"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/lottie_empty" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:fontFamily="@font/plus_jakarta_sans"
-                    android:gravity="center"
                     android:text="No expenses yet"
                     android:textColor="@color/on_surface_variant"
-                    android:textSize="14sp" />
+                    android:textSize="15sp" />
             </LinearLayout>
 
-            <!-- Expense list -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_expenses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_expense" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <!-- FAB: Add Expense (glowing, primary) -->
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/fab_add_expense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
-        android:elevation="12dp"
-        android:fontFamily="@font/space_grotesk"
         android:text="@string/add_expense"
-        android:textColor="@color/on_primary"
-        android:textStyle="bold"
+        android:textAllCaps="false"
         app:backgroundTint="@color/primary"
         app:icon="@drawable/ic_add"
-        app:iconTint="@color/on_primary" />
+        app:iconTint="@color/on_primary"
+        android:textColor="@color/on_primary" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

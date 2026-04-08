@@ -9,8 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.smartsplit.app.databinding.FragmentActivityLogBinding;
+import com.smartsplit.app.ui.motion.IosMotion;
 import com.smartsplit.app.ui.viewmodel.GroupViewModel;
 import com.smartsplit.app.data.model.Expense;
 import com.smartsplit.app.data.model.Member;
@@ -40,7 +42,12 @@ public class ActivityLogFragment extends Fragment {
         groupViewModel = new ViewModelProvider(requireActivity()).get(GroupViewModel.class);
         
         adapter = new ExpenseAdapter();
+        binding.rvActivityLog.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvActivityLog.setAdapter(adapter);
+        IosMotion.applyListLayoutAnimation(binding.rvActivityLog);
+        IosMotion.animateIn(binding.tvActivityTitle, 0);
+        IosMotion.animateIn(binding.tvActivitySubtitle, 40);
+        IosMotion.animateIn(binding.rvActivityLog, 110);
 
         long groupId = -1;
         if (getArguments() != null) {
@@ -61,6 +68,7 @@ public class ActivityLogFragment extends Fragment {
         groupViewModel.getExpensesForGroup(groupId).observe(getViewLifecycleOwner(), expenses -> {
             currentExpenses = expenses != null ? expenses : new ArrayList<>();
             adapter.submitList(currentExpenses, currentMembers);
+            binding.rvActivityLog.scheduleLayoutAnimation();
         });
     }
 

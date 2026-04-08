@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Icon glow background — blurred circle used behind expense category icons -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="#1AF382FF"/>  <!-- primary at 10% -->
-    <corners android:radius="16dp"/>
+    <solid android:color="@color/primary_container" />
+    <corners android:radius="16dp" />
 </shape>

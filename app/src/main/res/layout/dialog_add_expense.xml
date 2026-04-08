@@ -1,89 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Add Expense Dialog Layout.
-    UI/UX Pro Max Edition
--->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/surface_container"
     android:orientation="vertical"
-    android:padding="24dp"
-    android:background="@color/surface_container">
+    android:padding="18dp">
 
-    <!-- Amount (Massive Neon Text) -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="AMOUNT"
-        android:fontFamily="@font/plus_jakarta_sans"
-        android:textColor="@color/on_surface_variant"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:letterSpacing="0.1" />
-
-    <EditText
-        android:id="@+id/et_expense_amount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="24dp"
-        android:background="@null"
-        android:fontFamily="@font/space_grotesk"
-        android:gravity="center"
-        android:hint="$0.00"
-        android:inputType="numberDecimal"
-        android:textColor="@color/primary"
-        android:textColorHint="@color/glow_primary"
-        android:textSize="48sp"
-        android:textStyle="bold" />
-
-    <!-- Expense Title -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="WHAT WAS IT FOR?"
-        android:fontFamily="@font/plus_jakarta_sans"
+        android:text="@string/amount"
         android:textColor="@color/on_surface_variant"
-        android:textSize="12sp"
-        android:layout_marginBottom="8dp"
-        android:textStyle="bold"
-        android:letterSpacing="0.1" />
+        android:textSize="12sp" />
 
-    <EditText
-        android:id="@+id/et_expense_title"
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@drawable/bg_neon_input"
-        android:fontFamily="@font/space_grotesk"
-        android:hint="e.g. Dinner, Taxi, Tickets"
-        android:inputType="textCapSentences"
-        android:paddingHorizontal="16dp"
-        android:textColor="@color/on_surface"
-        android:textColorHint="@color/on_surface_variant"
-        android:textSize="16sp" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        app:boxBackgroundColor="@color/surface_container_high"
+        app:boxStrokeColor="@color/outline_variant"
+        app:hintEnabled="false">
 
-    <!-- Who Paid Spinner -->
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_expense_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="0.00"
+            android:inputType="numberDecimal"
+            android:textColor="@color/on_surface" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="WHO PAID?"
-        android:fontFamily="@font/plus_jakarta_sans"
+        android:layout_marginTop="14dp"
+        android:text="@string/what_was_it_for"
         android:textColor="@color/on_surface_variant"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        android:letterSpacing="0.1" />
+        android:textSize="12sp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        app:boxBackgroundColor="@color/surface_container_high"
+        app:boxStrokeColor="@color/outline_variant"
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_expense_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Dinner, Taxi, Tickets"
+            android:inputType="textCapSentences"
+            android:textColor="@color/on_surface" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="@string/who_paid"
+        android:textColor="@color/on_surface_variant"
+        android:textSize="12sp" />
 
     <Spinner
         android:id="@+id/spinner_paid_by"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
         android:background="@drawable/bg_spinner"
-        android:padding="8dp"
-        android:popupTheme="@style/Theme.SmartSplit"/>
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="10dp"
+        android:popupTheme="@style/Theme.SmartSplit" />
 
 </LinearLayout>

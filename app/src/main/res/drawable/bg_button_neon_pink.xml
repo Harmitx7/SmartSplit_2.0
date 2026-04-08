@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="#4DFFFFFF">
+    android:color="#14007AFF">
     <item>
         <shape android:shape="rectangle">
-            <!-- Full pill shape -->
-            <corners android:radius="100dp"/>
-            <!-- Solid Neon Magenta -->
-            <solid android:color="@color/primary"/>
+            <corners android:radius="14dp" />
+            <solid android:color="@color/primary" />
         </shape>
     </item>
 </ripple>

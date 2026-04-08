@@ -1,38 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Item layout for a single settlement transaction.
-    "Alice owes Bob ₹200"
-    Color: from = error (red), to = tertiary (green)
--->
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
-    app:cardBackgroundColor="@color/surface_container_high"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="0dp">
+    app:cardBackgroundColor="@color/surface_container"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="1dp"
+    app:strokeColor="@color/outline_variant"
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:padding="14dp"
         android:gravity="center_vertical">
 
-        <!-- Debtor name (who owes) -->
         <TextView
             android:id="@+id/tv_from_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Alice"
             android:textColor="@color/error"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="Alice" />
 
-        <!-- Arrow + amount in the center -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,33 +39,30 @@
                 android:id="@+id/tv_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="₹200"
                 android:textColor="@color/on_surface"
-                android:textSize="18sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
-                android:gravity="center" />
+                tools:text="200.00" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="→"
+                android:text="to"
                 android:textColor="@color/on_surface_variant"
-                android:textSize="18sp"
-                android:gravity="center" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
-        <!-- Creditor name (who receives) -->
         <TextView
             android:id="@+id/tv_to_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Bob"
-            android:textColor="@color/tertiary"
+            android:gravity="end"
+            android:textColor="@color/secondary"
             android:textSize="15sp"
             android:textStyle="bold"
-            android:gravity="end" />
+            tools:text="Bob" />
 
     </LinearLayout>
 

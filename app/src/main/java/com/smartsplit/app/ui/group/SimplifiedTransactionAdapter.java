@@ -8,31 +8,35 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.smartsplit.app.core.MoneyFormatter;
 import com.smartsplit.app.data.model.SettlementTransaction;
 import com.smartsplit.app.databinding.ItemSimplifiedTransactionBinding;
 
 import java.util.Locale;
 
 /**
- * RecyclerView adapter for simplified debt transactions.
- * Each row shows: [FromName] → [amount] → [ToName]
- * Styled to match Ethereal Ledger glassmorphic card design.
+ * Adapter for simplified debt transactions.
  */
 public class SimplifiedTransactionAdapter
-        extends ListAdapter<SettlementTransaction, SimplifiedTransactionAdapter.ViewHolder> {
+    extends ListAdapter<SettlementTransaction, SimplifiedTransactionAdapter.ViewHolder> {
+
+    private int lastAnimatedPosition = -1;
 
     private static final DiffUtil.ItemCallback<SettlementTransaction> DIFF_CALLBACK =
         new DiffUtil.ItemCallback<SettlementTransaction>() {
             @Override
-            public boolean areItemsTheSame(@NonNull SettlementTransaction a, @NonNull SettlementTransaction b) {
-                return a.fromMemberId == b.fromMemberId && a.toMemberId == b.toMemberId;
+            public boolean areItemsTheSame(@NonNull SettlementTransaction oldItem,
+                                           @NonNull SettlementTransaction newItem) {
+                return oldItem.fromMemberId == newItem.fromMemberId
+                    && oldItem.toMemberId == newItem.toMemberId;
             }
 
             @Override
-            public boolean areContentsTheSame(@NonNull SettlementTransaction a, @NonNull SettlementTransaction b) {
-                return a.amountPaise == b.amountPaise
-                    && a.fromName.equals(b.fromName)
-                    && a.toName.equals(b.toName);
+            public boolean areContentsTheSame(@NonNull SettlementTransaction oldItem,
+                                              @NonNull SettlementTransaction newItem) {
+                return oldItem.amountPaise == newItem.amountPaise
+                    && oldItem.fromName.equals(newItem.fromName)
+                    && oldItem.toName.equals(newItem.toName);
             }
         };
 
@@ -52,6 +56,25 @@ public class SimplifiedTransactionAdapter
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(getItem(position));
+        animateRow(holder, position);
+    }
+
+    private void animateRow(@NonNull ViewHolder holder, int position) {
+        if (position <= lastAnimatedPosition) {
+            holder.itemView.setAlpha(1f);
+            holder.itemView.setTranslationY(0f);
+            return;
+        }
+
+        holder.itemView.setAlpha(0f);
+        holder.itemView.setTranslationY(24f);
+        holder.itemView.animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setStartDelay(Math.min(position, 8) * 20L)
+            .setDuration(360)
+            .start();
+        lastAnimatedPosition = position;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -62,15 +85,13 @@ public class SimplifiedTransactionAdapter
             this.binding = binding;
         }
 
-        void bind(SettlementTransaction tx) {
-            binding.tvFromName.setText(tx.fromName);
-            binding.tvToName.setText(tx.toName);
+        void bind(SettlementTransaction transaction) {
+            binding.tvFromName.setText(transaction.fromName);
+            binding.tvToName.setText(transaction.toName);
+            binding.tvAmount.setText(MoneyFormatter.formatPaise(transaction.amountPaise));
+            binding.tvFromInitial.setText(extractInitial(transaction.fromName));
+            binding.tvToInitial.setText(extractInitial(transaction.toName));
 
-            // Convert paise → dollars for display
-            double amount = tx.amountPaise / 100.0;
-            binding.tvAmount.setText(String.format(Locale.US, "$%.2f", amount));
-
-            // Press animation (0.98 scale — Ethereal Ledger design spec)
             binding.getRoot().setOnClickListener(v -> {
                 v.animate()
                     .scaleX(0.97f)
@@ -83,6 +104,17 @@ public class SimplifiedTransactionAdapter
                         .start())
                     .start();
             });
+        }
+
+        private String extractInitial(String name) {
+            if (name == null) {
+                return "?";
+            }
+            String trimmed = name.trim();
+            if (trimmed.isEmpty()) {
+                return "?";
+            }
+            return trimmed.substring(0, 1).toUpperCase(Locale.getDefault());
         }
     }
 }

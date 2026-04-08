@@ -9,6 +9,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.smartsplit.app.data.model.Group;
+import com.smartsplit.app.data.model.GroupSummary;
 
 import java.util.List;
 
@@ -36,4 +37,14 @@ public interface GroupDao {
 
     @Query("SELECT * FROM groups WHERE id = :groupId LIMIT 1")
     Group getGroupByIdSync(long groupId);
+
+    @Query("SELECT " +
+           "g.id AS groupId, " +
+           "g.name AS name, " +
+           "g.icon AS icon, " +
+           "(SELECT COUNT(*) FROM members m WHERE m.group_id = g.id) AS memberCount, " +
+           "COALESCE((SELECT SUM(e.amount_paise) FROM expenses e WHERE e.group_id = g.id), 0) AS totalSpendPaise " +
+           "FROM groups g " +
+           "ORDER BY g.created_at DESC")
+    LiveData<List<GroupSummary>> getGroupSummaries();
 }

@@ -1,28 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Large blurred glow orb — primary color #f382ff blur effect -->
-<!-- Android XML cannot simulate CSS blur(120px). This creates a large
-     radial-gradient-like oval with layered alpha to simulate the glow.
-     Real blur is applied via RenderEffect in Java for API 31+ -->
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <shape android:shape="oval">
-            <solid android:color="#08F382FF"/>
-            <size android:width="300dp" android:height="300dp"/>
-        </shape>
-    </item>
-    <item android:bottom="20dp" android:left="20dp" android:right="20dp" android:top="20dp">
-        <shape android:shape="oval">
-            <solid android:color="#10F382FF"/>
-        </shape>
-    </item>
-    <item android:bottom="50dp" android:left="50dp" android:right="50dp" android:top="50dp">
-        <shape android:shape="oval">
-            <solid android:color="#18F382FF"/>
-        </shape>
-    </item>
-    <item android:bottom="80dp" android:left="80dp" android:right="80dp" android:top="80dp">
-        <shape android:shape="oval">
-            <solid android:color="#20F382FF"/>
-        </shape>
-    </item>
-</layer-list>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <gradient
+        android:type="radial"
+        android:gradientRadius="200dp"
+        android:centerColor="#22007AFF"
+        android:endColor="#00007AFF" />
+</shape>

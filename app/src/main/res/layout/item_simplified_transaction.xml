@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    item_simplified_transaction.xml
-    Glassmorphic row showing: [Avatar/Label] → [Amount] → [Avatar/Label]
-    Press: 0.98 scale animation (handled in adapter)
--->
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,18 +8,20 @@
     android:layout_marginBottom="10dp"
     android:clickable="true"
     android:focusable="true"
-    app:cardBackgroundColor="@color/glass_surface_40"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="0dp">
+    app:cardBackgroundColor="@color/surface_container"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="1dp"
+    app:rippleColor="@color/glow_primary"
+    app:strokeColor="@color/outline_variant"
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="18dp">
+        android:padding="14dp">
 
-        <!-- FROM: Name pill -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -32,10 +29,9 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <!-- Avatar circle with initials -->
             <FrameLayout
-                android:layout_width="44dp"
-                android:layout_height="44dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@drawable/bg_icon_glow_primary">
 
                 <TextView
@@ -43,9 +39,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/space_grotesk"
                     android:textColor="@color/primary"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     tools:text="A" />
             </FrameLayout>
@@ -54,16 +49,13 @@
                 android:id="@+id/tv_from_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:fontFamily="@font/plus_jakarta_sans"
-                android:maxLines="1"
+                android:layout_marginTop="4dp"
                 android:textColor="@color/on_surface"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 tools:text="Alice" />
         </LinearLayout>
 
-        <!-- Center: Amount + arrow -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -75,46 +67,21 @@
                 android:id="@+id/tv_amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/space_grotesk"
-                android:textColor="@color/primary"
-                android:textSize="22sp"
+                android:textColor="@color/on_surface"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                tools:text="$45.00" />
-
-            <!-- Animated arrow -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <View
-                    android:layout_width="32dp"
-                    android:layout_height="2dp"
-                    android:background="@color/primary_dim" />
-
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:src="@drawable/ic_arrow_right"
-                    app:tint="@color/primary_dim" />
-            </LinearLayout>
+                tools:text="120.00" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:fontFamily="@font/plus_jakarta_sans"
-                android:letterSpacing="0.1"
                 android:text="pays"
                 android:textAllCaps="true"
                 android:textColor="@color/on_surface_variant"
-                android:textSize="8sp"
-                android:textStyle="bold" />
+                android:textSize="10sp" />
         </LinearLayout>
 
-        <!-- TO: Name pill -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -123,8 +90,8 @@
             android:orientation="vertical">
 
             <FrameLayout
-                android:layout_width="44dp"
-                android:layout_height="44dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:background="@drawable/bg_icon_glow_secondary">
 
                 <TextView
@@ -132,9 +99,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:fontFamily="@font/space_grotesk"
                     android:textColor="@color/secondary"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     tools:text="B" />
             </FrameLayout>
@@ -143,13 +109,13 @@
                 android:id="@+id/tv_to_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:fontFamily="@font/plus_jakarta_sans"
-                android:maxLines="1"
+                android:layout_marginTop="4dp"
                 android:textColor="@color/on_surface"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 tools:text="Bob" />
         </LinearLayout>
+
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+
+</com.google.android.material.card.MaterialCardView>

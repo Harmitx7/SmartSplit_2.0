@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- App & Navigation -->
+    <!-- App and Navigation -->
     <string name="app_name">SmartSplit</string>
     <string name="app_tagline">Split expenses, not hairs.</string>
-    <string name="trusted_count">Trusted by 50,000+ Students</string>
+    <string name="trusted_count">Trusted by 50,000+ students</string>
     <string name="nav_groups">Groups</string>
     <string name="nav_balances">Balances</string>
     <string name="nav_analytics">Analytics</string>
@@ -69,8 +69,9 @@
     <string name="you_owe_amount">you owe %1$s</string>
     <string name="settle_all">Settle All</string>
     <string name="settle_up">Settle Up</string>
-    <string name="all_settled">All settled! 🎉</string>
+    <string name="all_settled">All settled!</string>
     <string name="all_settled_subtitle">This group is fully balanced.</string>
+    <string name="select_group">Select group</string>
 
     <!-- Analytics -->
     <string name="analytics">Analytics</string>
@@ -78,6 +79,7 @@
     <string name="top_spender">Top Spender</string>
     <string name="total_spend">Total Spend</string>
     <string name="no_expenses_analytics">No expenses to analyze yet.</string>
+    <string name="analytics_invalid_group">Open analytics from a valid group.</string>
     <string name="category_food">Food</string>
     <string name="category_bills">Bills</string>
     <string name="category_transport">Transport</string>
@@ -86,8 +88,9 @@
 
     <!-- Activity Log -->
     <string name="activity_log">Activity Log</string>
-    <string name="added_expense">%1$s added %2$s ($%3$s)</string>
-    <string name="settled_amount">%1$s settled $%2$s with %3$s</string>
+    <string name="activity_log_subtitle">Recent expense activity in this group</string>
+    <string name="added_expense">%1$s added %2$s (%3$s)</string>
+    <string name="settled_amount">%1$s settled %2$s with %3$s</string>
     <string name="no_activity">No activity yet.</string>
     <string name="no_activity_subtitle">Add an expense to see your history here.</string>
 
@@ -100,13 +103,25 @@
     <string name="simplified_to">Simplified to: %1$d transactions</string>
 
     <!-- Common UI -->
-    <string name="loading">Loading…</string>
+    <string name="loading">Loading...</string>
     <string name="error_generic">Something went wrong. Please try again.</string>
     <string name="owes">owes</string>
     <string name="you">You</string>
     <string name="active">Active</string>
 
-    <!-- Content Descriptions (Accessibility) -->
+    <!-- Profile -->
+    <string name="profile_guest">Your Profile</string>
+    <string name="profile_guest_subtitle">Sign in to manage your account</string>
+    <string name="profile_no_email">No email available</string>
+    <string name="profile_stats">Overview</string>
+    <string name="profile_edit_name">Edit Name</string>
+    <string name="profile_sign_out">Sign Out</string>
+    <string name="profile_login_required">Please sign in to edit your profile.</string>
+    <string name="profile_name_hint">Enter display name</string>
+    <string name="profile_name_empty">Name cannot be empty.</string>
+    <string name="profile_update_failed">Could not update profile: %1$s</string>
+
+    <!-- Content Descriptions -->
     <string name="cd_user_avatar">User profile picture</string>
     <string name="cd_notification_bell">Notifications</string>
     <string name="cd_add_expense_fab">Add new expense</string>

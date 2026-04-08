@@ -1,65 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Splash Screen Layout
-    Deep Space background with centered glowing logo text.
-    Design: "The Ethereal Ledger" — Stitch spec.
--->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/surface">
 
-    <!-- App Logo / Brand mark -->
     <LinearLayout
-        android:id="@+id/ll_brand"
+        android:id="@+id/splash_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <!-- Glow Icon Circle -->
-        <View
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@drawable/bg_icon_glow"
-            android:layout_gravity="center" />
+        app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
+            android:id="@+id/tv_splash_icon"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:gravity="center"
+            android:background="@drawable/bg_icon_glow"
+            android:text="S"
+            android:textColor="@color/primary"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_splash_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="14dp"
             android:text="SmartSplit"
             android:textColor="@color/on_surface"
             android:textSize="32sp"
             android:textStyle="bold"
-            android:letterSpacing="-0.02"
             android:fontFamily="sans-serif-medium" />
 
         <TextView
+            android:id="@+id/tv_splash_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Split smart. Settle easy."
             android:textColor="@color/on_surface_variant"
             android:textSize="14sp" />
-
     </LinearLayout>
 
-    <!-- Loading indicator at bottom -->
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:indeterminateTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="48dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="42dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

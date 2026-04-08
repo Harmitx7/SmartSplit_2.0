@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.smartsplit.app.R;
+import com.smartsplit.app.ui.motion.IosMotion;
 import com.smartsplit.app.ui.auth.AuthActivity;
 
 /**
@@ -23,6 +24,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        playSplashMotion();
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -37,5 +39,12 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(new Intent(SplashActivity.this, destination));
             finish();
         }, 1500);
+    }
+
+    private void playSplashMotion() {
+        IosMotion.animateIn(findViewById(R.id.tv_splash_icon), 0);
+        IosMotion.animateIn(findViewById(R.id.tv_splash_title), 70);
+        IosMotion.animateIn(findViewById(R.id.tv_splash_subtitle), 120);
+        IosMotion.animateIn(findViewById(R.id.progressBar), 190);
     }
 }

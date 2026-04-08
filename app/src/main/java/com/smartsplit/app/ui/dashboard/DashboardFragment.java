@@ -16,13 +16,19 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseUser;
 import com.smartsplit.app.R;
+import com.smartsplit.app.core.MoneyFormatter;
 import com.smartsplit.app.databinding.FragmentDashboardBinding;
+import com.smartsplit.app.data.model.GroupSummary;
+import com.smartsplit.app.ui.motion.IosMotion;
 import com.smartsplit.app.ui.viewmodel.AuthViewModel;
 import com.smartsplit.app.ui.viewmodel.GroupViewModel;
+import com.smartsplit.app.ui.utils.TouchPhysics;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Dashboard fragment — shows all the user's groups.
- * Primary entry point after login.
+ * Dashboard fragment showing all groups.
  */
 public class DashboardFragment extends Fragment {
 
@@ -51,30 +57,43 @@ public class DashboardFragment extends Fragment {
         observeGroups();
         setupFab();
         updateGreeting();
+        setupMotion();
     }
 
     private void setupRecyclerView() {
         groupAdapter = new GroupAdapter(group -> {
-            // Navigate to GroupDetail passing the group's ID
             Bundle args = new Bundle();
-            args.putLong("groupId", group.id);
-            Navigation.findNavController(requireView()).navigate(R.id.action_dashboard_to_groupDetail, args);
+            args.putLong("groupId", group.groupId);
+            Navigation.findNavController(requireView())
+                .navigate(R.id.action_dashboard_to_groupDetail, args);
         });
 
         binding.rvGroups.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvGroups.setAdapter(groupAdapter);
+        IosMotion.applyListLayoutAnimation(binding.rvGroups);
     }
 
     private void observeGroups() {
-        groupViewModel.getAllGroups().observe(getViewLifecycleOwner(), groups -> {
-            groupAdapter.submitList(groups);
-            if (groups != null && groups.isEmpty()) {
-                binding.llEmpty.setVisibility(View.VISIBLE);
-                binding.rvGroups.setVisibility(View.GONE);
-            } else {
-                binding.llEmpty.setVisibility(View.GONE);
-                binding.rvGroups.setVisibility(View.VISIBLE);
+        groupViewModel.getGroupSummaries().observe(getViewLifecycleOwner(), summaries -> {
+            List<GroupSummary> safeSummaries = summaries != null ? summaries : new ArrayList<>();
+            groupAdapter.submitList(safeSummaries);
+
+            boolean showEmpty = safeSummaries.isEmpty();
+            binding.llEmpty.setVisibility(showEmpty ? View.VISIBLE : View.GONE);
+            binding.rvGroups.setVisibility(showEmpty ? View.GONE : View.VISIBLE);
+            if (!showEmpty) {
+                binding.rvGroups.scheduleLayoutAnimation();
             }
+
+            long totalSpendPaise = 0L;
+            for (GroupSummary summary : safeSummaries) {
+                if (summary != null) {
+                    totalSpendPaise += Math.max(0L, summary.totalSpendPaise);
+                }
+            }
+
+            binding.tvDashboardGroupCount.setText(String.valueOf(safeSummaries.size()));
+            binding.tvDashboardTotalSpend.setText(MoneyFormatter.formatPaise(totalSpendPaise));
         });
     }
 
@@ -83,18 +102,29 @@ public class DashboardFragment extends Fragment {
         binding.fabAdd.setOnClickListener(v -> showCreateGroupDialog());
     }
 
+    private void setupMotion() {
+        IosMotion.animateIn(binding.tvDashboardTitle, 0);
+        IosMotion.animateIn(binding.tvDashboardSubtitle, 40);
+        IosMotion.animateIn(binding.cardSummary, 80);
+        IosMotion.animateIn(binding.rowGroupsHeader, 130);
+        IosMotion.animateIn(binding.rvGroups, 170);
+        IosMotion.animateIn(binding.fabAdd, 240);
+        
+        // Apply 2026 Pro Max Spring Physics
+        TouchPhysics.addSpringPressEffect(binding.cardSummary);
+        TouchPhysics.addSpringPressEffect(binding.btnCreateGroup);
+        TouchPhysics.addSpringPressEffect(binding.fabAdd);
+    }
+
     private void updateGreeting() {
         FirebaseUser user = authViewModel.getCurrentUser();
         if (user != null && user.getEmail() != null) {
-            String email = user.getEmail();
-            String displayName = email.contains("@") ? email.substring(0, email.indexOf("@")) : email;
-            // Removed tvUserEmail as it's no longer in the glassmorphism layout
+            // Header currently has static text in XML.
         }
     }
 
     private void showCreateGroupDialog() {
-        View dialogView = LayoutInflater.from(requireContext())
-            .inflate(R.layout.dialog_create_group, null);
+        View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_create_group, null);
 
         new MaterialAlertDialogBuilder(requireContext())
             .setTitle("Create Group")
@@ -104,12 +134,12 @@ public class DashboardFragment extends Fragment {
                 TextInputEditText etIcon = dialogView.findViewById(R.id.et_group_icon);
 
                 String name = etName.getText() != null ? etName.getText().toString().trim() : "";
-                String icon = etIcon.getText() != null ? etIcon.getText().toString().trim() : "🏠";
+                String icon = etIcon.getText() != null ? etIcon.getText().toString().trim() : "";
 
                 if (!name.isEmpty()) {
                     FirebaseUser user = authViewModel.getCurrentUser();
                     String uid = user != null ? user.getUid() : "local";
-                    groupViewModel.createGroup(name, icon.isEmpty() ? "🏠" : icon, uid);
+                    groupViewModel.createGroup(name, icon.isEmpty() ? "G" : icon, uid);
                 }
             })
             .setNegativeButton("Cancel", null)
