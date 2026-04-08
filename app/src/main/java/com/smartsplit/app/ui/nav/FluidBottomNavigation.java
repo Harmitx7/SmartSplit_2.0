@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.dynamicanimation.animation.SpringAnimation;
 import androidx.dynamicanimation.animation.SpringForce;
@@ -133,7 +134,9 @@ public class FluidBottomNavigation extends FrameLayout {
         int sizePx = dp(INDICATOR_SIZE_DP);
 
         floatingIndicator = new FrameLayout(getContext());
-        floatingIndicator.setBackground(getContext().getDrawable(R.drawable.bg_fluid_indicator));
+        // Use ContextCompat to avoid deprecated getDrawable() and handle null safely
+        android.graphics.drawable.Drawable bg = ContextCompat.getDrawable(getContext(), R.drawable.bg_fluid_indicator);
+        if (bg != null) floatingIndicator.setBackground(bg);
         floatingIndicator.setElevation(dp(12));
 
         // White icon inside the circle — use SRC_IN so vector paths tint correctly
@@ -158,14 +161,15 @@ public class FluidBottomNavigation extends FrameLayout {
     // ─── Public API ───────────────────────────────────────────────────────────
 
     public void setTabs(List<TabItem> items) {
+        if (items == null || items.isEmpty()) return;
         tabs.clear();
         tabs.addAll(items);
         tabsContainer.removeAllViews();
         tabViews.clear();
+        // Clamp selectedIndex in case it's stale from a previous setTabs call
+        if (selectedIndex >= tabs.size()) selectedIndex = 0;
         buildTabViews();
-        if (!tabs.isEmpty()) {
-            indicatorIconView.setImageResource(tabs.get(selectedIndex).iconResId);
-        }
+        indicatorIconView.setImageResource(tabs.get(selectedIndex).iconResId);
     }
 
     public void setOnTabSelectedListener(OnTabSelectedListener l) {
@@ -230,22 +234,35 @@ public class FluidBottomNavigation extends FrameLayout {
     // ─── Appearance Updates ───────────────────────────────────────────────────
 
     private void updateTabAppearances(int prevIndex, int newIndex) {
-        // Fade previous tab icon + label back in
+        // Fade previous tab icon + label back in — guard against null children
         if (prevIndex >= 0 && prevIndex < tabViews.size()) {
-            LinearLayout prev = (LinearLayout) tabViews.get(prevIndex);
-            ImageView prevIcon = (ImageView) prev.getChildAt(0);
-            TextView prevLabel = (TextView) prev.getChildAt(1);
-            prevIcon.setColorFilter(Color.parseColor("#94A3B8"), PorterDuff.Mode.SRC_IN);
-            prevIcon.animate().alpha(1f).setDuration(200).setInterpolator(EXPO_EASE_OUT).start();
-            prevLabel.animate().alpha(1f).setDuration(200).setInterpolator(EXPO_EASE_OUT).start();
+            View prevView = tabViews.get(prevIndex);
+            if (prevView instanceof LinearLayout) {
+                LinearLayout prev = (LinearLayout) prevView;
+                View child0 = prev.getChildAt(0);
+                View child1 = prev.getChildAt(1);
+                if (child0 instanceof ImageView) {
+                    ((ImageView) child0).setColorFilter(Color.parseColor("#94A3B8"), PorterDuff.Mode.SRC_IN);
+                    child0.animate().alpha(1f).setDuration(200).setInterpolator(EXPO_EASE_OUT).start();
+                }
+                if (child1 != null) {
+                    child1.animate().alpha(1f).setDuration(200).setInterpolator(EXPO_EASE_OUT).start();
+                }
+            }
         }
         // Fade new tab out — indicator takes over visually
         if (newIndex >= 0 && newIndex < tabViews.size()) {
-            LinearLayout next = (LinearLayout) tabViews.get(newIndex);
-            ((ImageView) next.getChildAt(0)).animate().alpha(0f).setDuration(130).start();
-            ((TextView) next.getChildAt(1)).animate().alpha(0f).setDuration(130).start();
-            // Swap icon inside indicator circle
-            indicatorIconView.setImageResource(tabs.get(newIndex).iconResId);
+            View nextView = tabViews.get(newIndex);
+            if (nextView instanceof LinearLayout) {
+                LinearLayout next = (LinearLayout) nextView;
+                View child0 = next.getChildAt(0);
+                View child1 = next.getChildAt(1);
+                if (child0 != null) child0.animate().alpha(0f).setDuration(130).start();
+                if (child1 != null) child1.animate().alpha(0f).setDuration(130).start();
+            }
+            if (newIndex < tabs.size()) {
+                indicatorIconView.setImageResource(tabs.get(newIndex).iconResId);
+            }
         }
     }
 
@@ -308,7 +325,7 @@ public class FluidBottomNavigation extends FrameLayout {
     // ─── Tab Click → Animation ────────────────────────────────────────────────
 
     private void onTabTapped(int index) {
-        if (index == selectedIndex) return;
+        if (index == selectedIndex || index < 0 || index >= tabs.size()) return;
         int prev = selectedIndex;
         selectedIndex = index;
         updateTabAppearances(prev, index);
