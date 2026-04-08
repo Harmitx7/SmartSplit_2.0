@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Split - Balances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0c0e12;
+            color: #f6f6fc;
+        }
+        .headline-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .glass-card {
+            background: rgba(29, 32, 37, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .glass-settle {
+            background: linear-gradient(135deg, rgba(243, 130, 255, 0.2), rgba(237, 105, 255, 0.1));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#000000",
+                    "surface-dim": "#0c0e12",
+                    "primary-fixed": "#ed69ff",
+                    "surface-container-high": "#1d2025",
+                    "secondary-fixed": "#48e4ff",
+                    "tertiary": "#c4ffcd",
+                    "on-secondary-container": "#eafbff",
+                    "outline-variant": "#46484d",
+                    "surface-bright": "#292c32",
+                    "on-tertiary-container": "#005f2e",
+                    "surface-container-highest": "#23262c",
+                    "error-container": "#a70138",
+                    "on-primary": "#540061",
+                    "inverse-primary": "#a300bb",
+                    "on-surface": "#f6f6fc",
+                    "on-tertiary-fixed-variant": "#006a34",
+                    "secondary-container": "#006877",
+                    "on-primary-fixed-variant": "#51005d",
+                    "tertiary-container": "#6dfe9c",
+                    "on-error": "#490013",
+                    "on-secondary-fixed-variant": "#005966",
+                    "on-tertiary": "#006833",
+                    "secondary-dim": "#1ad0eb",
+                    "primary-container": "#ed69ff",
+                    "tertiary-fixed": "#6dfe9c",
+                    "tertiary-fixed-dim": "#5def8f",
+                    "primary": "#f382ff",
+                    "secondary-fixed-dim": "#29d6f1",
+                    "on-secondary-fixed": "#003a43",
+                    "secondary": "#3adffa",
+                    "on-primary-container": "#41004c",
+                    "primary-dim": "#ec63ff",
+                    "inverse-on-surface": "#53555a",
+                    "error-dim": "#d73357",
+                    "on-surface-variant": "#aaabb0",
+                    "on-secondary": "#004b56",
+                    "surface-tint": "#f382ff",
+                    "surface-container-low": "#111318",
+                    "on-tertiary-fixed": "#004a22",
+                    "surface-variant": "#23262c",
+                    "surface-container-lowest": "#000000",
+                    "error": "#ff6e84",
+                    "surface": "#0c0e12",
+                    "on-background": "#f6f6fc",
+                    "on-error-container": "#ffb2b9",
+                    "inverse-surface": "#f9f9ff",
+                    "tertiary-dim": "#5def8f",
+                    "outline": "#74757a",
+                    "primary-fixed-dim": "#e451f9",
+                    "surface-container": "#171a1f",
+                    "background": "#0c0e12"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-dim min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#0c0e12]/60 backdrop-blur-xl flex justify-between items-center px-6 py-4 w-full shadow-[0_40px_40px_-5px_rgba(243,130,255,0.06)]">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant/20">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Close-up portrait of a young man with a friendly expression in soft studio lighting, modern minimalist aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeqYzSkLh2HOJ0FTOqJhq4qptpqfFstOwxXr5uyihxhhDP3lPhiKQuRW55rP1rGj5e9Pw3KhWZyqiFAOlZOnhanXDs06wjY-PjbSLRC8spxuJfmK_VBQCW-24tzpLw7zq-YBTxa0pKqoiX8bGmGQoCs_rKD1vpgaV5T_Jne-FTRvaimG1JETggJj5IqIDoRPXuA68h9cdkddG8-hF4OD3sZ2xL8WmS2_7-aJG8onxt04bDRcj4uTs7oDvuCz4vluZUgMcXi6mxetnf"/>
+</div>
+<h1 class="font-['Space_Grotesk'] text-2xl font-bold tracking-tight text-[#f382ff] italic">Smart Split</h1>
+</div>
+<button class="material-symbols-outlined text-slate-400 hover:opacity-80 transition-opacity">notifications</button>
+</header>
+<main class="pt-24 px-6 max-w-2xl mx-auto">
+<!-- Hero Balance Section -->
+<section class="mb-12 text-center">
+<p class="text-on-surface-variant font-label text-xs uppercase tracking-[0.2em] mb-2">Total Net Balance</p>
+<h2 class="headline-font text-6xl font-bold text-on-surface tracking-tighter">
+                $30.00
+            </h2>
+<div class="flex justify-center gap-4 mt-6">
+<div class="flex items-center gap-2 px-4 py-2 rounded-full bg-tertiary/10 text-tertiary border border-tertiary/20">
+<span class="material-symbols-outlined text-sm">arrow_downward</span>
+<span class="text-xs font-bold uppercase tracking-wider">Owed to you</span>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 rounded-full bg-error/10 text-error border border-error/20">
+<span class="material-symbols-outlined text-sm">arrow_upward</span>
+<span class="text-xs font-bold uppercase tracking-wider">You owe</span>
+</div>
+</div>
+</section>
+<!-- Settlement List -->
+<div class="space-y-4">
+<!-- Creditor Item -->
+<div class="glass-card rounded-2xl p-5 flex items-center justify-between group hover:bg-surface-container-high transition-all duration-300">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl overflow-hidden bg-surface-container-highest">
+<img alt="Alice" class="w-full h-full object-cover" data-alt="Portrait of a young woman with smiling eyes and vibrant energy, outdoor natural lighting with soft bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLtaeiaZ3wdEPJtJbhQP6obhkQockFkTkYXZ1A7EgOKazvXou1V7x0wKR8xzbRYEv8M4MMQeN1JrgxLPB02UbEEAr6W4JZ5R3p-Ejbz-jKqHBLtttPj23dqI_wTNYGy5Nv8hcJYjlc_1JxyuB3YSzUnr4ZGDrHDp887s-oS8sa-PiaWb9oryTmYoTxmkr-A6msa2U4wNFxZvb1gSlLIuRvAY4VCVPkbBNBJcMbA02rtwYoa2UoNpGFwLX78mu_l0Vjm8xDJpbznhXk"/>
+</div>
+<div>
+<h3 class="text-on-surface font-semibold text-lg">Alice</h3>
+<p class="text-tertiary text-sm font-medium flex items-center gap-1">
+                            owes you $50.00
+                        </p>
+</div>
+</div>
+<div class="w-10 h-10 rounded-full border border-tertiary/30 flex items-center justify-center text-tertiary group-hover:bg-tertiary group-hover:text-on-tertiary transition-all duration-300">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<!-- Debtor Item -->
+<div class="glass-card rounded-2xl p-5 flex items-center justify-between group hover:bg-surface-container-high transition-all duration-300">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl overflow-hidden bg-surface-container-highest">
+<img alt="Bob" class="w-full h-full object-cover" data-alt="Candid portrait of a young man wearing glasses, urban setting with neon street light reflections at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA84WRQ_1Bk2d7zI0HJqj_dIkKmKpm08Gi0H6QV-l47Q-5SoGazog9OYXPOeWea6Mee12yrUSWjSdx9i26A0hlypgQxTFXRAoTvY2V-9J1YyFI4Xpu3IU2IfhI4cimsKncXqVrT9vXW4LJpqI9kfxzYqu3Nja89KuNfSeKqSYitnz7G-Ftg6bLOUBit8pnyCKT-nIyLbSrm3t2R11BErB4jCFh8mpPvvrCqrYg-eQv1nppVBjjVAPPMqFa98srKcUQ2sfhRC1AOsEh"/>
+</div>
+<div>
+<h3 class="text-on-surface font-semibold text-lg">Bob</h3>
+<p class="text-error text-sm font-medium flex items-center gap-1">
+                            you owe $20.00
+                        </p>
+</div>
+</div>
+<div class="w-10 h-10 rounded-full border border-error/30 flex items-center justify-center text-error group-hover:bg-error group-hover:text-on-error transition-all duration-300">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+<!-- Creditor Item -->
+<div class="glass-card rounded-2xl p-5 flex items-center justify-between group hover:bg-surface-container-high transition-all duration-300">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl overflow-hidden bg-surface-container-highest">
+<img alt="Chloe" class="w-full h-full object-cover" data-alt="Close up of a person with expressive features and cool-toned fashion, minimalist architectural background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoGgIgG01lWexGZFKDVzi2GnYukNXeJfDlumOrH2LXfKnIwaAMiNX0OnUH3doe3Rvu9ADEQvNYUprlt-yunydo9v_Cl7onJHRIWT_QcrBJfdZP3899F3PrEfBhqctKpDPBJnvVOBrpPo0YzVjXCSla4QU2YN8M6iP-1Rq4K_XeIn9bZb53lW3CK7nDqqM2OhUq962SlQo8ApRa-iFrnghseIFOR0QWauyv5bSyIVBt9zg0PEsK44c7Ka-8MpHwMM86QJxe4Fa75F5G"/>
+</div>
+<div>
+<h3 class="text-on-surface font-semibold text-lg">Chloe</h3>
+<p class="text-tertiary text-sm font-medium flex items-center gap-1">
+                            owes you $12.50
+                        </p>
+</div>
+</div>
+<div class="w-10 h-10 rounded-full border border-tertiary/30 flex items-center justify-center text-tertiary group-hover:bg-tertiary group-hover:text-on-tertiary transition-all duration-300">
+<span class="material-symbols-outlined">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Settle All Floating Button -->
+<div class="fixed bottom-28 left-0 w-full px-6 flex justify-center pointer-events-none">
+<button class="pointer-events-auto glass-settle px-12 py-5 rounded-full border border-primary/30 flex items-center gap-4 active:scale-95 duration-150 shadow-[0_20px_50px_rgba(243,130,255,0.2)] group">
+<span class="headline-font text-primary font-bold text-lg tracking-wider uppercase">Settle All</span>
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-on-primary group-hover:translate-x-1 transition-transform">
+<span class="material-symbols-outlined text-sm">keyboard_double_arrow_right</span>
+</div>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#0c0e12]/40 backdrop-blur-2xl z-50 rounded-t-[2rem] shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+<div class="flex flex-col items-center justify-center text-slate-500 px-5 py-2 hover:text-[#3adffa] transition-colors active:scale-90 duration-150">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium uppercase tracking-widest mt-1">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-[#f382ff]/20 text-[#f382ff] rounded-2xl px-5 py-2 scale-105 transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined">group</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium uppercase tracking-widest mt-1">Groups</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 px-5 py-2 hover:text-[#3adffa] transition-colors active:scale-90 duration-150">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium uppercase tracking-widest mt-1">Profile</span>
+</div>
+</nav>
+</body></html>

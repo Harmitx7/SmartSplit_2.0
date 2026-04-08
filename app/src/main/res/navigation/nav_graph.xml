@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <!-- ── Dashboard (Groups List) ──────────────────────────── -->
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.smartsplit.app.ui.dashboard.DashboardFragment"
+        android:label="@string/nav_groups">
+        <action
+            android:id="@+id/action_dashboard_to_groupDetail"
+            app:destination="@id/groupDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <!-- ── Balances ──────────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/balancesFragment"
+        android:name="com.smartsplit.app.ui.balances.BalancesFragment"
+        android:label="@string/nav_balances" />
+
+    <!-- ── Analytics (NEW) ───────────────────────────────────── -->
+    <fragment
+        android:id="@+id/analyticsFragment"
+        android:name="com.smartsplit.app.ui.analytics.AnalyticsFragment"
+        android:label="@string/nav_analytics">
+        <argument
+            android:name="groupId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
+
+    <!-- ── Group Detail ──────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/groupDetailFragment"
+        android:name="com.smartsplit.app.ui.group.GroupDetailFragment"
+        android:label="@string/group_detail">
+        <argument
+            android:name="groupId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+        <action
+            android:id="@+id/action_groupDetail_to_activityLog"
+            app:destination="@id/activityLogFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_groupDetail_to_analytics"
+            app:destination="@id/analyticsFragment"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_groupDetail_to_debtSimplification"
+            app:destination="@id/debtSimplificationFragment"
+            app:enterAnim="@anim/slide_in_up"
+            app:exitAnim="@anim/fade_out" />
+    </fragment>
+
+    <!-- ── Activity Log ──────────────────────────────────────── -->
+    <fragment
+        android:id="@+id/activityLogFragment"
+        android:name="com.smartsplit.app.ui.group.ActivityLogFragment"
+        android:label="@string/activity_log">
+        <argument
+            android:name="groupId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
+
+    <!-- ── Debt Simplification (NEW) ─────────────────────────── -->
+    <fragment
+        android:id="@+id/debtSimplificationFragment"
+        android:name="com.smartsplit.app.ui.group.DebtSimplificationFragment"
+        android:label="@string/simplified_transactions">
+        <argument
+            android:name="groupId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
+
+</navigation>

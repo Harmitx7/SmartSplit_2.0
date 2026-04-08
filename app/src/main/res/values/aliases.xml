@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ── Alias: background = surface (used by old code references) -->
+    <color name="background">@color/surface</color>
+
+    <!-- ── nav_dashboard alias → nav_groups -->
+    <string name="nav_dashboard">@string/nav_groups</string>
+</resources>

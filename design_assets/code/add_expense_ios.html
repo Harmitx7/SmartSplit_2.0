@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#000000",
+                        "surface-dim": "#0c0e12",
+                        "primary-fixed": "#ed69ff",
+                        "surface-container-high": "#1d2025",
+                        "secondary-fixed": "#48e4ff",
+                        "tertiary": "#c4ffcd",
+                        "on-secondary-container": "#eafbff",
+                        "outline-variant": "#46484d",
+                        "surface-bright": "#292c32",
+                        "on-tertiary-container": "#005f2e",
+                        "surface-container-highest": "#23262c",
+                        "error-container": "#a70138",
+                        "on-primary": "#540061",
+                        "inverse-primary": "#a300bb",
+                        "on-surface": "#f6f6fc",
+                        "on-tertiary-fixed-variant": "#006a34",
+                        "secondary-container": "#006877",
+                        "on-primary-fixed-variant": "#51005d",
+                        "tertiary-container": "#6dfe9c",
+                        "on-error": "#490013",
+                        "on-secondary-fixed-variant": "#005966",
+                        "on-tertiary": "#006833",
+                        "secondary-dim": "#1ad0eb",
+                        "primary-container": "#ed69ff",
+                        "tertiary-fixed": "#6dfe9c",
+                        "tertiary-fixed-dim": "#5def8f",
+                        "primary": "#f382ff",
+                        "secondary-fixed-dim": "#29d6f1",
+                        "on-secondary-fixed": "#003a43",
+                        "secondary": "#3adffa",
+                        "on-primary-container": "#41004c",
+                        "primary-dim": "#ec63ff",
+                        "inverse-on-surface": "#53555a",
+                        "error-dim": "#d73357",
+                        "on-surface-variant": "#aaabb0",
+                        "on-secondary": "#004b56",
+                        "surface-tint": "#f382ff",
+                        "surface-container-low": "#111318",
+                        "on-tertiary-fixed": "#004a22",
+                        "surface-variant": "#23262c",
+                        "surface-container-lowest": "#000000",
+                        "error": "#ff6e84",
+                        "surface": "#0c0e12",
+                        "on-background": "#f6f6fc",
+                        "on-error-container": "#ffb2b9",
+                        "inverse-surface": "#f9f9ff",
+                        "tertiary-dim": "#5def8f",
+                        "outline": "#74757a",
+                        "primary-fixed-dim": "#e451f9",
+                        "surface-container": "#171a1f",
+                        "background": "#0c0e12"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(29, 32, 37, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .ios-segmented-bg {
+            background: rgba(120, 120, 128, 0.24);
+        }
+        .ios-segmented-item-active {
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 3px 8px 0 rgba(0,0,0,0.12), 0 3px 1px 0 rgba(0,0,0,0.04);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(243, 130, 255, 0.3);
+        }
+        .ios-border-bottom {
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+        }
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+</head>
+<body class="bg-surface-dim text-on-surface font-body min-h-screen flex flex-col overflow-x-hidden">
+<!-- iOS Modal Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-[#0c0e12]/80 backdrop-blur-xl ios-border-bottom">
+<div class="flex justify-between items-center px-4 py-3">
+<button class="text-primary text-lg font-normal hover:opacity-70 transition-opacity">
+                Cancel
+            </button>
+<h1 class="font-semibold text-lg tracking-tight">Smart Split</h1>
+<button class="text-primary text-lg font-semibold hover:opacity-70 transition-opacity">
+                Done
+            </button>
+</div>
+</header>
+<main class="flex-grow pt-16 pb-12 flex flex-col max-w-2xl mx-auto w-full">
+<!-- Amount Input (iOS Large Header Style) -->
+<section class="flex flex-col items-center justify-center py-12 px-6">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant/50 mb-2">Total Amount</span>
+<div class="relative w-full flex justify-center">
+<input class="bg-transparent border-none text-center font-bold text-7xl md:text-8xl text-on-surface focus:ring-0 w-full placeholder-on-surface-variant/20" placeholder="$0.00" type="text" value="$0.00"/>
+</div>
+</section>
+<!-- iOS Form Style List -->
+<div class="px-4 space-y-8">
+<!-- Form Group: Details -->
+<section class="space-y-2">
+<div class="bg-surface-container/60 glass-panel rounded-2xl overflow-hidden">
+<div class="relative ios-border-bottom flex items-center">
+<input class="w-full bg-transparent border-none px-4 py-4 text-base focus:ring-0 placeholder:text-on-surface-variant/40" placeholder="Description" type="text"/>
+<div class="pr-4">
+<span class="material-symbols-outlined text-on-surface-variant/40 text-xl">edit_note</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Payer Selection -->
+<section class="space-y-3">
+<div class="flex justify-between items-center px-2">
+<h3 class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant/60">Who Paid?</h3>
+<span class="text-[10px] font-bold text-primary uppercase">Required</span>
+</div>
+<div class="flex gap-3 overflow-x-auto pb-1 no-scrollbar -mx-4 px-4">
+<!-- You Chip (Active) -->
+<button class="flex-shrink-0 flex items-center gap-3 px-4 py-2.5 rounded-full bg-primary/20 border border-primary/20 text-primary transition-all">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/30">
+<img class="w-full h-full object-cover" data-alt="portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEk2g-vFLWeX_orJj_26CXfz2f3iVrVwE8ANHe-CpKoRT42A-jEiiSfPsWrqgORU2tEfo1Awr_gVF4z7pHNm5yHl_YhRQRKnZ6fywPr6bw-8mknKfuGNwybADSD2ABGBIK9cRR1q0QRILGFmhILTHvccCJqpuaU8QzNj0orR-kjvix7pIDciRSZX1e4nD0Tfxn-ThyUVMwlPoJ4VCU7rnvstb5Wk65rfffXjFiTYg_QPTT5JsW0JmKgcvHOrJksDRMF_pA0-VcvVsD"/>
+</div>
+<span class="font-semibold text-sm">You</span>
+</button>
+<!-- Bob Chip -->
+<button class="flex-shrink-0 flex items-center gap-3 px-4 py-2.5 rounded-full bg-surface-container-high glass-panel text-on-surface-variant">
+<div class="w-8 h-8 rounded-full overflow-hidden grayscale opacity-80">
+<img class="w-full h-full object-cover" data-alt="portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoOy9yn8-XZa2jK1IP5YE57dlIvGpUGN0510hoIG5hbRJkyCoP6gQPNNi5fHX3guaj02u8L4wilcH3zGdPm0Zn7EUBm4GHQIiT5WW8YyGPg52AXsdWzGPnqY6gJ8V4HaLx9Xx-QMFJL1uBG78fmY1MVCUqO4DjmnWRV5Ss5LAO9bEZj9Fw_zLw-j7fOFZexBy7LHx7cDS3ttcJlugxmrbNVMaUFqTm2KgMpikBimVWy3FjjpnCQZaNvX7PHqHuSpFjPF5aanxoCHKW"/>
+</div>
+<span class="font-medium text-sm">Bob</span>
+</button>
+<!-- Alice Chip -->
+<button class="flex-shrink-0 flex items-center gap-3 px-4 py-2.5 rounded-full bg-surface-container-high glass-panel text-on-surface-variant">
+<div class="w-8 h-8 rounded-full overflow-hidden grayscale opacity-80">
+<img class="w-full h-full object-cover" data-alt="portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAud-mWKBPds6dvz8clQDnH-_yoLGKfuqH8my9BVxiJRqukPmql2gqRLEy0hWLXgzorZJ_7LIv3um0ohjBJJeamYCqoHgadh0r6et24tSM4QRAqJD4A2AxoLv-L1a3hAPVbEWuU3hae9wXm00GoTOAK-86WQPsQIvOO-vM-_ccvE3Uxycvyp6AXguJmMfhTjB93rhqt3L4CGJp7AspqkivdLSgRRj1cYivk_P5u1ZhcHp-wp9YfdkDwSbj5p0NOKAhR62QkwIxt77q0"/>
+</div>
+<span class="font-medium text-sm">Alice</span>
+</button>
+</div>
+</section>
+<!-- Split Logic (iOS Segmented Control) -->
+<section class="space-y-3">
+<h3 class="px-2 text-xs font-semibold uppercase tracking-wider text-on-surface-variant/60">Split Method</h3>
+<div class="ios-segmented-bg p-1 rounded-xl flex items-center">
+<button class="flex-1 ios-segmented-item-active py-1.5 rounded-lg text-sm font-semibold text-on-surface transition-all">
+                        Equal
+                    </button>
+<button class="flex-1 py-1.5 rounded-lg text-sm font-medium text-on-surface-variant transition-all hover:text-on-surface">
+                        Percentage
+                    </button>
+<button class="flex-1 py-1.5 rounded-lg text-sm font-medium text-on-surface-variant transition-all hover:text-on-surface">
+                        Manual
+                    </button>
+</div>
+</section>
+<!-- Summary Card -->
+<section class="glass-panel p-5 rounded-2xl space-y-5">
+<div class="flex justify-between items-center">
+<span class="font-semibold text-sm text-on-surface-variant">Split Preview</span>
+<span class="text-tertiary font-bold text-sm">$0.00 / person</span>
+</div>
+<div class="space-y-4">
+<div class="flex gap-1 h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full w-1/3 bg-primary/80"></div>
+<div class="h-full w-1/3 bg-secondary/80"></div>
+<div class="h-full w-1/3 bg-tertiary/80"></div>
+</div>
+<div class="flex justify-between">
+<div class="flex items-center gap-1.5">
+<div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
+<span class="text-[10px] text-on-surface-variant/80 font-semibold uppercase">You</span>
+</div>
+<div class="flex items-center gap-1.5">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary"></div>
+<span class="text-[10px] text-on-surface-variant/80 font-semibold uppercase">Bob</span>
+</div>
+<div class="flex items-center gap-1.5">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+<span class="text-[10px] text-on-surface-variant/80 font-semibold uppercase">Alice</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Final Action -->
+<section class="pt-4">
+<button class="w-full py-4 rounded-2xl bg-primary text-on-primary-fixed font-bold text-lg tracking-tight active:scale-95 transition-transform shadow-lg shadow-primary/20">
+                    Confirm Expense
+                </button>
+</section>
+</div>
+</main>
+<!-- Navigation Spacer -->
+<div class="h-8"></div>
+</body></html>

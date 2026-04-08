@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Split - Roommates 2026</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#000000",
+                    "surface-dim": "#0c0e12",
+                    "primary-fixed": "#ed69ff",
+                    "surface-container-high": "#1d2025",
+                    "secondary-fixed": "#48e4ff",
+                    "tertiary": "#c4ffcd",
+                    "on-secondary-container": "#eafbff",
+                    "outline-variant": "#46484d",
+                    "surface-bright": "#292c32",
+                    "on-tertiary-container": "#005f2e",
+                    "surface-container-highest": "#23262c",
+                    "error-container": "#a70138",
+                    "on-primary": "#540061",
+                    "inverse-primary": "#a300bb",
+                    "on-surface": "#f6f6fc",
+                    "on-tertiary-fixed-variant": "#006a34",
+                    "secondary-container": "#006877",
+                    "on-primary-fixed-variant": "#51005d",
+                    "tertiary-container": "#6dfe9c",
+                    "on-error": "#490013",
+                    "on-secondary-fixed-variant": "#005966",
+                    "on-tertiary": "#006833",
+                    "secondary-dim": "#1ad0eb",
+                    "primary-container": "#ed69ff",
+                    "tertiary-fixed": "#6dfe9c",
+                    "tertiary-fixed-dim": "#5def8f",
+                    "primary": "#f382ff",
+                    "secondary-fixed-dim": "#29d6f1",
+                    "on-secondary-fixed": "#003a43",
+                    "secondary": "#3adffa",
+                    "on-primary-container": "#41004c",
+                    "primary-dim": "#ec63ff",
+                    "inverse-on-surface": "#53555a",
+                    "error-dim": "#d73357",
+                    "on-surface-variant": "#aaabb0",
+                    "on-secondary": "#004b56",
+                    "surface-tint": "#f382ff",
+                    "surface-container-low": "#111318",
+                    "on-tertiary-fixed": "#004a22",
+                    "surface-variant": "#23262c",
+                    "surface-container-lowest": "#000000",
+                    "error": "#ff6e84",
+                    "surface": "#0c0e12",
+                    "on-background": "#f6f6fc",
+                    "on-error-container": "#ffb2b9",
+                    "inverse-surface": "#f9f9ff",
+                    "tertiary-dim": "#5def8f",
+                    "outline": "#74757a",
+                    "primary-fixed-dim": "#e451f9",
+                    "surface-container": "#171a1f",
+                    "background": "#0c0e12"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Space Grotesk"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(29, 32, 37, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        .neon-glow-primary {
+            box-shadow: 0 0 20px rgba(243, 130, 255, 0.4);
+        }
+        body {
+            background-color: #0c0e12;
+            color: #f6f6fc;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen overflow-x-hidden pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#0c0e12]/60 backdrop-blur-xl shadow-[0_40px_40px_-5px_rgba(243,130,255,0.06)] flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Close up portrait of a young man with a friendly expression in soft urban lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1qV5onl30wHO6u1k1dtNhm-VPcMsMP7BTbkxT9QB-82guT63Eq-XNFs_SJ65flyahRKwVAJEfGi9ZGCK7TSUEoDXSrgnY43jNYa0XLa_-WX28TcJ1OELu9xz5SNDwp_yybXPIgrBdHUcdt-1NZXBL4r1ezCWgCcWRVASLaAIgA_5YtUhAM5TiEo7EFj8QZuIFmP6T4KCHAt2u07gU9WYbGh7f-zw0G26omkh_Hv-GbYxLm4p35qJn22tMBzZ56wAW_RSKAHxRPciZ"/>
+</div>
+<h1 class="text-[#f382ff] font-['Space_Grotesk'] text-2xl font-bold tracking-tight italic">Smart Split</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-400 hover:opacity-80 transition-opacity" data-icon="notifications">notifications</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-24 px-6 max-w-2xl mx-auto">
+<!-- Hero Section -->
+<div class="mb-10 relative">
+<div class="absolute -top-10 -left-10 w-32 h-32 bg-primary/10 blur-[80px] rounded-full"></div>
+<div class="absolute -bottom-10 -right-10 w-40 h-40 bg-secondary/10 blur-[80px] rounded-full"></div>
+<div class="flex items-end justify-between mb-2">
+<div>
+<span class="font-headline text-secondary text-sm font-bold tracking-widest uppercase mb-1 block">Group Detail</span>
+<h2 class="font-headline text-4xl font-black tracking-tighter text-on-surface">Roommates 2026</h2>
+</div>
+<div class="text-right">
+<span class="block text-on-surface-variant text-[10px] uppercase tracking-widest mb-1">Total Group Debt</span>
+<span class="text-3xl font-headline font-bold text-primary">$482.50</span>
+</div>
+</div>
+<!-- Quick Stats Bento -->
+<div class="grid grid-cols-2 gap-4 mt-8">
+<div class="glass-card rounded-2xl p-4 border border-outline-variant/10">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-tertiary text-sm" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Your Balance</span>
+</div>
+<div class="text-2xl font-headline font-bold text-tertiary">+$124.00</div>
+</div>
+<div class="glass-card rounded-2xl p-4 border border-outline-variant/10">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="group">group</span>
+<span class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Members</span>
+</div>
+<div class="text-2xl font-headline font-bold text-on-surface">4 Active</div>
+</div>
+</div>
+</div>
+<!-- Chronological List -->
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<h3 class="font-headline text-xl font-bold">Expenses</h3>
+<button class="text-secondary text-sm font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="filter_list">filter_list</span>
+                    Filter
+                </button>
+</div>
+<div class="space-y-4">
+<!-- Date Header -->
+<div class="flex items-center gap-4 py-2">
+<span class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant">October 14, 2024</span>
+<div class="h-px flex-1 bg-gradient-to-r from-outline-variant/30 to-transparent"></div>
+</div>
+<!-- Expense Card 1 -->
+<div class="glass-card group relative p-5 rounded-3xl border border-outline-variant/10 flex items-center gap-4 transition-all hover:bg-surface-container-high/60 active:scale-[0.98]">
+<div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl" data-icon="shopping_cart">shopping_cart</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h4 class="font-headline text-lg font-bold">Groceries</h4>
+<span class="text-xl font-headline font-black text-on-surface">$45.00</span>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<img class="w-5 h-5 rounded-full object-cover" data-alt="Studio portrait of a smiling young woman with clear lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo65u3BfX-5kvqnEZYRjeJMRrY5vN4x2y4ATLcLZEG6CbO1CbEE9eQCIMfe4oFPlNTI52jv9v5oUl5do7ue2jA0N4kNwdttrvTVolid0AEyBGo5cxjP-jAiY7IgBsiWpZ1v0Q-gM_wEstcIjH5JuM4hQ_yrQ0QbWqVI80XLjLK79Nj4rQfGh6PBGP1_RP-bIBZbGmcxaQ2grhcn9W-iRzkjSdSS_pq3C4pFFq_uXBJdntWVK7m0MObUtxLO92jjdlsn5xSexqaUsRF"/>
+<span class="text-sm text-on-surface-variant">Paid by <span class="text-on-surface font-medium">Sarah</span></span>
+</div>
+</div>
+</div>
+<!-- Expense Card 2 -->
+<div class="glass-card group relative p-5 rounded-3xl border border-outline-variant/10 flex items-center gap-4 transition-all hover:bg-surface-container-high/60 active:scale-[0.98]">
+<div class="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-2xl" data-icon="bolt">bolt</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h4 class="font-headline text-lg font-bold">Electricity</h4>
+<span class="text-xl font-headline font-black text-on-surface">$120.00</span>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<img class="w-5 h-5 rounded-full object-cover" data-alt="Professional headshot of a man with clean background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiomFJwlfedCuX6Nfz3Q0xRcIF34v0IcWkn-9rYaUEns0ufEWHUOy7xDzpXqElDjzWk0IyMblfsTWQc051kL3DMgyo8Y_6amFoIx1k9QNhg0MxVDuSi_k_LoC5SWd7KanjuQcjhmmpY94rdTYf5PxR0EQcbqL-UnrwtZrioUhhij9l4Njm4EBXXdGIv6CTM-QVuXxNForQtNcw0qOGm1-BrpA0jZpaGr-CD7x0NEusTuRyL_bxMqh8vp0kUV_IElSjqLTLKoBUjdRl"/>
+<span class="text-sm text-on-surface-variant">Paid by <span class="text-on-surface font-medium">Marcus</span></span>
+</div>
+</div>
+</div>
+<!-- Date Header -->
+<div class="flex items-center gap-4 py-2 mt-8">
+<span class="text-[10px] uppercase tracking-[0.2em] font-bold text-on-surface-variant">October 12, 2024</span>
+<div class="h-px flex-1 bg-gradient-to-r from-outline-variant/30 to-transparent"></div>
+</div>
+<!-- Expense Card 3 -->
+<div class="glass-card group relative p-5 rounded-3xl border border-outline-variant/10 flex items-center gap-4 transition-all hover:bg-surface-container-high/60 active:scale-[0.98]">
+<div class="w-14 h-14 rounded-2xl bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-2xl" data-icon="restaurant">restaurant</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h4 class="font-headline text-lg font-bold">Friday Pizza Night</h4>
+<span class="text-xl font-headline font-black text-on-surface">$68.20</span>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<img class="w-5 h-5 rounded-full object-cover" data-alt="Close up portrait of a young man with a friendly expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUHsNIVMwvwsHjf4HiOXMj0No9lnsYe97SgtMSLSqALhnYAXCYQ0tG7N9vYRlxyXiHm3t5yWNC7O9Lh6Hfr7TBNDVw21Zz04WYeammevx7t62J7FbKQ58ZVQVGDAbQ22Ghw-y5I0i5-A1sfV-hyGas_Aw1fWJH5aEMkfhJ4ht69c77O9SZuTsdeiXmPVtA7WFjMLD2OnjAPlh6sfN4TS9D8yv_t6ZtEfbpBCyJB6RCi-nrO2NDun-Eed81aTjqm3AKLu2vnBEgqEg5"/>
+<span class="text-sm text-on-surface-variant">Paid by <span class="text-on-surface font-medium">You</span></span>
+</div>
+</div>
+</div>
+<!-- Expense Card 4 -->
+<div class="glass-card group relative p-5 rounded-3xl border border-outline-variant/10 flex items-center gap-4 transition-all hover:bg-surface-container-high/60 active:scale-[0.98]">
+<div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl" data-icon="wifi">wifi</span>
+</div>
+<div class="flex-1">
+<div class="flex items-center justify-between">
+<h4 class="font-headline text-lg font-bold">Internet Bill</h4>
+<span class="text-xl font-headline font-black text-on-surface">$80.00</span>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<img class="w-5 h-5 rounded-full object-cover" data-alt="Studio portrait of a smiling young woman" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaEvT8w5to-nc72A8bFx9COSAjdw9c6fFev4rqWErODJuE7v72NtbEYglltDKF1T5QUorttczbUexRPhwPUA__5m_4R6eZ9o_KkJU01PZPgE6NrH8jH2XMvaYOEtB-fJwlXf2Sqti9aAexL3ZcexJeHn_LtCgy6IaB7ze66BieRXvETItgADtMkwYKVa9iMzW1JjtO_JJ0H7nI0m21BFp4O1Mu0M7rz7e9X2MP5dhMojKaP_Kbq48Su8OGgsJ0SQfYHyZk3Q3A6Gqj"/>
+<span class="text-sm text-on-surface-variant">Paid by <span class="text-on-surface font-medium">Sarah</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB: Add Expense -->
+<button class="fixed bottom-32 right-6 w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary-fixed flex items-center justify-center neon-glow-primary active:scale-90 transition-transform z-50">
+<span class="material-symbols-outlined text-3xl font-bold" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#0c0e12]/40 backdrop-blur-2xl rounded-t-[2rem] z-50 shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-slate-500 px-5 py-2 hover:text-[#3adffa] transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium uppercase tracking-widest mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#f382ff]/20 text-[#f382ff] rounded-2xl px-5 py-2 scale-105 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="group" data-weight="fill">group</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium uppercase tracking-widest mt-1">Groups</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 px-5 py-2 hover:text-[#3adffa] transition-colors active:scale-90 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-medium uppercase tracking-widest mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

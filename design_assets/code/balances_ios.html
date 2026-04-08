@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Smart Split - Balances</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ios-nav-blur {
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+        }
+        .glass-card {
+            background: rgba(28, 28, 30, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 24px;
+        }
+        .ios-tab-active {
+            color: #f382ff;
+        }
+        /* SF Pro style letter spacing for iOS feel */
+        .tracking-tight-ios {
+            letter-spacing: -0.02em;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#f382ff",
+                    "surface-ios": "#1c1c1e",
+                    "secondary-ios": "#2c2c2e",
+                    "tertiary-ios": "#3a3a3c",
+                    "label-secondary": "#8e8e93",
+                    "ios-blue": "#007aff",
+                    "error": "#ff453a",
+                    "success": "#32d74b"
+            },
+            "borderRadius": {
+                    "ios": "10px",
+                    "ios-lg": "12px",
+                    "ios-xl": "20px"
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-black min-h-screen pb-32">
+<!-- iOS Navigation Bar -->
+<header class="fixed top-0 w-full z-50 ios-nav-blur border-b border-white/10 h-11 flex items-center px-4">
+<div class="flex-1 flex items-center">
+<button class="flex items-center text-primary active:opacity-30 transition-opacity">
+<span class="material-symbols-outlined !text-[28px]">chevron_left</span>
+<span class="text-[17px] -ml-1">Back</span>
+</button>
+</div>
+<div class="absolute left-1/2 -translate-x-1/2">
+<h1 class="text-[17px] font-semibold tracking-tight-ios">Smart Split</h1>
+</div>
+<div class="flex-1 flex justify-end">
+<button class="material-symbols-outlined text-primary active:opacity-30 transition-opacity">notifications</button>
+</div>
+</header>
+<main class="pt-16 px-4 max-w-2xl mx-auto">
+<!-- Hero Balance Section -->
+<section class="mt-8 mb-10 text-center">
+<p class="text-label-secondary text-[13px] font-medium uppercase tracking-wider mb-1">Total Net Balance</p>
+<h2 class="text-5xl font-bold tracking-tight-ios text-white">
+            $30.00
+        </h2>
+<div class="flex justify-center gap-3 mt-6">
+<div class="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-success/10 text-success border border-success/20">
+<span class="material-symbols-outlined !text-[16px]">arrow_downward</span>
+<span class="text-[13px] font-semibold">Owed to you</span>
+</div>
+<div class="flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-error/10 text-error border border-error/20">
+<span class="material-symbols-outlined !text-[16px]">arrow_upward</span>
+<span class="text-[13px] font-semibold">You owe</span>
+</div>
+</div>
+</section>
+<!-- iOS List Style -->
+<div class="bg-surface-ios/50 rounded-ios-lg overflow-hidden border border-white/5">
+<!-- Alice -->
+<div class="glass-card flex items-center justify-between p-4 active:bg-white/10 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-white/5 bg-secondary-ios">
+<img alt="Alice" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLtaeiaZ3wdEPJtJbhQP6obhkQockFkTkYXZ1A7EgOKazvXou1V7x0wKR8xzbRYEv8M4MMQeN1JrgxLPB02UbEEAr6W4JZ5R3p-Ejbz-jKqHBLtttPj23dqI_wTNYGy5Nv8hcJYjlc_1JxyuB3YSzUnr4ZGDrHDp887s-oS8sa-PiaWb9oryTmYoTxmkr-A6msa2U4wNFxZvb1gSlLIuRvAY4VCVPkbBNBJcMbA02rtwYoa2UoNpGFwLX78mu_l0Vjm8xDJpbznhXk"/>
+</div>
+<div>
+<h3 class="text-white font-semibold text-[17px]">Alice</h3>
+<p class="text-success text-[15px]">owes you $50.00</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-label-secondary !text-[20px]">chevron_right</span>
+</div>
+<!-- Bob -->
+<div class="glass-card flex items-center justify-between p-4 active:bg-white/10 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-white/5 bg-secondary-ios">
+<img alt="Bob" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA84WRQ_1Bk2d7zI0HJqj_dIkKmKpm08Gi0H6QV-l47Q-5SoGazog9OYXPOeWea6Mee12yrUSWjSdx9i26A0hlypgQxTFXRAoTvY2V-9J1YyFI4Xpu3IU2IfhI4cimsKncXqVrT9vXW4LJpqI9kfxzYqu3Nja89KuNfSeKqSYitnz7G-Ftg6bLOUBit8pnyCKT-nIyLbSrm3t2R11BErB4jCFh8mpPvvrCqrYg-eQv1nppVBjjVAPPMqFa98srKcUQ2sfhRC1AOsEh"/>
+</div>
+<div>
+<h3 class="text-white font-semibold text-[17px]">Bob</h3>
+<p class="text-error text-[15px]">you owe $20.00</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-label-secondary !text-[20px]">chevron_right</span>
+</div>
+<!-- Chloe -->
+<div class="glass-card flex items-center justify-between p-4 border-none active:bg-white/10 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-white/5 bg-secondary-ios">
+<img alt="Chloe" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoGgIgG01lWexGZFKDVzi2GnYukNXeJfDlumOrH2LXfKnIwaAMiNX0OnUH3doe3Rvu9ADEQvNYUprlt-yunydo9v_Cl7onJHRIWT_QcrBJfdZP3899F3PrEfBhqctKpDPBJnvVOBrpPo0YzVjXCSla4QU2YN8M6iP-1Rq4K_XeIn9bZb53lW3CK7nDqqM2OhUq962SlQo8ApRa-iFrnghseIFOR0QWauyv5bSyIVBt9zg0PEsK44c7Ka-8MpHwMM86QJxe4Fa75F5G"/>
+</div>
+<div>
+<h3 class="text-white font-semibold text-[17px]">Chloe</h3>
+<p class="text-success text-[15px]">owes you $12.50</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-label-secondary !text-[20px]">chevron_right</span>
+</div>
+</div>
+<!-- Settle All Button (iOS Prominent Style) -->
+<div class="mt-12 px-2">
+<button class="w-full bg-primary text-black font-bold py-4 rounded-ios-lg active:opacity-70 transition-all shadow-lg flex items-center justify-center gap-2">
+<span class="text-[17px]">Settle All</span>
+<span class="material-symbols-outlined !text-[20px]">forward_5</span>
+</button>
+</div>
+</main>
+<!-- iOS Tab Bar -->
+<nav class="fixed bottom-0 left-0 w-full ios-nav-blur border-t border-white/10 pb-8 pt-2 z-50">
+<div class="flex justify-around items-center max-w-md mx-auto">
+<div class="flex flex-col items-center justify-center text-label-secondary active:opacity-50 transition-opacity">
+<span class="material-symbols-outlined !text-[26px]">space_dashboard</span>
+<span class="text-[10px] font-medium mt-1">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center ios-tab-active active:opacity-50 transition-opacity">
+<span class="material-symbols-outlined !text-[26px] !fill-1">group</span>
+<span class="text-[10px] font-medium mt-1">Groups</span>
+</div>
+<div class="flex flex-col items-center justify-center text-label-secondary active:opacity-50 transition-opacity">
+<span class="material-symbols-outlined !text-[26px]">account_circle</span>
+<span class="text-[10px] font-medium mt-1">Profile</span>
+</div>
+</div>
+</nav>
+</body></html>

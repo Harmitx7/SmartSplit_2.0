@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Smart Split - Roommates 2026</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#000000",
+                    "surface-dim": "#0c0e12",
+                    "primary-fixed": "#ed69ff",
+                    "surface-container-high": "#1d2025",
+                    "secondary-fixed": "#48e4ff",
+                    "tertiary": "#c4ffcd",
+                    "on-secondary-container": "#eafbff",
+                    "outline-variant": "#46484d",
+                    "surface-bright": "#292c32",
+                    "on-tertiary-container": "#005f2e",
+                    "surface-container-highest": "#23262c",
+                    "error-container": "#a70138",
+                    "on-primary": "#540061",
+                    "inverse-primary": "#a300bb",
+                    "on-surface": "#f6f6fc",
+                    "on-tertiary-fixed-variant": "#006a34",
+                    "secondary-container": "#006877",
+                    "on-primary-fixed-variant": "#51005d",
+                    "tertiary-container": "#6dfe9c",
+                    "on-error": "#490013",
+                    "on-secondary-fixed-variant": "#005966",
+                    "on-tertiary": "#006833",
+                    "secondary-dim": "#1ad0eb",
+                    "primary-container": "#ed69ff",
+                    "tertiary-fixed": "#6dfe9c",
+                    "tertiary-fixed-dim": "#5def8f",
+                    "primary": "#f382ff",
+                    "secondary-fixed-dim": "#29d6f1",
+                    "on-secondary-fixed": "#003a43",
+                    "secondary": "#3adffa",
+                    "on-primary-container": "#41004c",
+                    "primary-dim": "#ec63ff",
+                    "inverse-on-surface": "#53555a",
+                    "error-dim": "#d73357",
+                    "on-surface-variant": "#aaabb0",
+                    "on-secondary": "#004b56",
+                    "surface-tint": "#f382ff",
+                    "surface-container-low": "#111318",
+                    "on-tertiary-fixed": "#004a22",
+                    "surface-variant": "#23262c",
+                    "surface-container-lowest": "#000000",
+                    "error": "#ff6e84",
+                    "surface": "#0c0e12",
+                    "on-background": "#f6f6fc",
+                    "on-error-container": "#ffb2b9",
+                    "inverse-surface": "#f9f9ff",
+                    "tertiary-dim": "#5def8f",
+                    "outline": "#74757a",
+                    "primary-fixed-dim": "#e451f9",
+                    "surface-container": "#171a1f",
+                    "background": "#0c0e12"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(29, 32, 37, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+        body {
+            background-color: #000000;
+            color: #f6f6fc;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .ios-list-item:active {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .ios-list-container > *:not(:last-child) {
+            border-bottom: 0.5px solid rgba(116, 117, 122, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden pb-24">
+<!-- iOS Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-[#0c0e12]/80 backdrop-blur-xl border-b border-white/5 px-4 h-11 flex items-center justify-between">
+<button class="flex items-center text-primary gap-1 active:opacity-40 transition-opacity">
+<span class="material-symbols-outlined !text-[24px]" style="font-variation-settings: 'wght' 300;">chevron_left</span>
+<span class="text-[17px]">Groups</span>
+</button>
+<h1 class="absolute left-1/2 -translate-x-1/2 text-[17px] font-semibold text-on-surface">Roommates 2026</h1>
+<button class="text-primary active:opacity-40 transition-opacity">
+<span class="material-symbols-outlined !text-[28px]" style="font-variation-settings: 'wght' 300;">add</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="pt-11 max-w-2xl mx-auto">
+<!-- Hero Summary (iOS Header Style) -->
+<div class="px-6 py-8">
+<div class="flex justify-between items-baseline mb-6">
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-on-surface">Roommates 2026</h2>
+<p class="text-sm text-on-surface-variant mt-1">4 Active Members</p>
+</div>
+<div class="text-right">
+<p class="text-[11px] uppercase tracking-wider text-on-surface-variant font-semibold">Total Debt</p>
+<p class="text-3xl font-bold text-primary">$482.50</p>
+</div>
+</div>
+<!-- Summary Tiles -->
+<div class="grid grid-cols-2 gap-3">
+<div class="glass-card rounded-2xl p-4 border border-white/5">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="text-[11px] font-semibold text-on-surface-variant uppercase tracking-wide">Balance</span>
+</div>
+<div class="text-xl font-bold text-tertiary">+$124.00</div>
+</div>
+<div class="glass-card rounded-2xl p-4 border border-white/5">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-secondary text-lg" data-icon="payments">payments</span>
+<span class="text-[11px] font-semibold text-on-surface-variant uppercase tracking-wide">Due Soon</span>
+</div>
+<div class="text-xl font-bold text-on-surface">$15.00</div>
+</div>
+</div>
+</div>
+<!-- Expenses Section -->
+<div class="mt-2">
+<!-- iOS Style List -->
+<div class="space-y-8">
+<!-- Date Group -->
+<div>
+<div class="px-6 py-2">
+<h3 class="text-[13px] font-semibold text-on-surface-variant uppercase tracking-wider">Monday, Oct 14</h3>
+</div>
+<div class="glass-card border-y border-white/5 ios-list-container">
+<!-- Expense Cell 1 -->
+<div class="ios-list-item flex items-center gap-4 px-6 py-3 transition-colors">
+<div class="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined !text-[22px]" data-icon="shopping_cart">shopping_cart</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<h4 class="text-[17px] font-medium text-on-surface truncate">Groceries</h4>
+<span class="text-[17px] font-medium text-on-surface">$45.00</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<img alt="Sarah" class="w-4 h-4 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo65u3BfX-5kvqnEZYRjeJMRrY5vN4x2y4ATLcLZEG6CbO1CbEE9eQCIMfe4oFPlNTI52jv9v5oUl5do7ue2jA0N4kNwdttrvTVolid0AEyBGo5cxjP-jAiY7IgBsiWpZ1v0Q-gM_wEstcIjH5JuM4hQ_yrQ0QbWqVI80XLjLK79Nj4rQfGh6PBGP1_RP-bIBZbGmcxaQ2grhcn9W-iRzkjSdSS_pq3C4pFFq_uXBJdntWVK7m0MObUtxLO92jjdlsn5xSexqaUsRF"/>
+<span class="text-[13px] text-on-surface-variant">Paid by Sarah</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant !text-[18px]">chevron_right</span>
+</div>
+<!-- Expense Cell 2 -->
+<div class="ios-list-item flex items-center gap-4 px-6 py-3 transition-colors">
+<div class="w-10 h-10 rounded-xl bg-secondary/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined !text-[22px]" data-icon="bolt">bolt</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<h4 class="text-[17px] font-medium text-on-surface truncate">Electricity</h4>
+<span class="text-[17px] font-medium text-on-surface">$120.00</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<img alt="Marcus" class="w-4 h-4 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiomFJwlfedCuX6Nfz3Q0xRcIF34v0IcWkn-9rYaUEns0ufEWHUOy7xDzpXqElDjzWk0IyMblfsTWQc051kL3DMgyo8Y_6amFoIx1k9QNhg0MxVDuSi_k_LoC5SWd7KanjuQcjhmmpY94rdTYf5PxR0EQcbqL-UnrwtZrioUhhij9l4Njm4EBXXdGIv6CTM-QVuXxNForQtNcw0qOGm1-BrpA0jZpaGr-CD7x0NEusTuRyL_bxMqh8vp0kUV_IElSjqLTLKoBUjdRl"/>
+<span class="text-[13px] text-on-surface-variant">Paid by Marcus</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant !text-[18px]">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Date Group -->
+<div>
+<div class="px-6 py-2">
+<h3 class="text-[13px] font-semibold text-on-surface-variant uppercase tracking-wider">Saturday, Oct 12</h3>
+</div>
+<div class="glass-card border-y border-white/5 ios-list-container">
+<!-- Expense Cell 3 -->
+<div class="ios-list-item flex items-center gap-4 px-6 py-3 transition-colors">
+<div class="w-10 h-10 rounded-xl bg-tertiary/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined !text-[22px]" data-icon="restaurant">restaurant</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<h4 class="text-[17px] font-medium text-on-surface truncate">Friday Pizza Night</h4>
+<span class="text-[17px] font-medium text-on-surface">$68.20</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<img alt="You" class="w-4 h-4 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUHsNIVMwvwsHjf4HiOXMj0No9lnsYe97SgtMSLSqALhnYAXCYQ0tG7N9vYRlxyXiHm3t5yWNC7O9Lh6Hfr7TBNDVw21Zz04WYeammevx7t62J7FbKQ58ZVQVGDAbQ22Ghw-y5I0i5-A1sfV-hyGas_Aw1fWJH5aEMkfhJ4ht69c77O9SZuTsdeiXmPVtA7WFjMLD2OnjAPlh6sfN4TS9D8yv_t6ZtEfbpBCyJB6RCi-nrO2NDun-Eed81aTjqm3AKLu2vnBEgqEg5"/>
+<span class="text-[13px] text-on-surface-variant">Paid by You</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant !text-[18px]">chevron_right</span>
+</div>
+<!-- Expense Cell 4 -->
+<div class="ios-list-item flex items-center gap-4 px-6 py-3 transition-colors">
+<div class="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined !text-[22px]" data-icon="wifi">wifi</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<h4 class="text-[17px] font-medium text-on-surface truncate">Internet Bill</h4>
+<span class="text-[17px] font-medium text-on-surface">$80.00</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<img alt="Sarah" class="w-4 h-4 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaEvT8w5to-nc72A8bFx9COSAjdw9c6fFev4rqWErODJuE7v72NtbEYglltDKF1T5QUorttczbUexRPhwPUA__5m_4R6eZ9o_KkJU01PZPgE6NrH8jH2XMvaYOEtB-fJwlXf2Sqti9aAexL3ZcexJeHn_LtCgy6IaB7ze66BieRXvETItgADtMkwYKVa9iMzW1JjtO_JJ0H7nI0m21BFp4O1Mu0M7rz7e9X2MP5dhMojKaP_Kbq48Su8OGgsJ0SQfYHyZk3Q3A6Gqj"/>
+<span class="text-[13px] text-on-surface-variant">Paid by Sarah</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant !text-[18px]">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- iOS Tab Bar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-end px-2 pb-2 pt-1.5 bg-[#0c0e12]/80 backdrop-blur-2xl border-t border-white/5 z-50">
+<a class="flex flex-col items-center justify-center flex-1 py-1 text-slate-500 active:opacity-40 transition-opacity" href="#">
+<span class="material-symbols-outlined !text-[26px]" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span class="text-[10px] mt-0.5 font-medium">Summary</span>
+</a>
+<a class="flex flex-col items-center justify-center flex-1 py-1 text-primary active:opacity-40 transition-opacity" href="#">
+<span class="material-symbols-outlined !text-[26px]" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="text-[10px] mt-0.5 font-medium">Groups</span>
+</a>
+<a class="flex flex-col items-center justify-center flex-1 py-1 text-slate-500 active:opacity-40 transition-opacity" href="#">
+<span class="material-symbols-outlined !text-[26px]" style="font-variation-settings: 'FILL' 0;">person</span>
+<span class="text-[10px] mt-0.5 font-medium">Profile</span>
+</a>
+</nav>
+</body></html>

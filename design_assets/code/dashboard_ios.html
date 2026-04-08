@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Smart Split - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#000000",
+                        "surface-dim": "#0c0e12",
+                        "primary-fixed": "#ed69ff",
+                        "surface-container-high": "#1d2025",
+                        "secondary-fixed": "#48e4ff",
+                        "tertiary": "#c4ffcd",
+                        "on-secondary-container": "#eafbff",
+                        "outline-variant": "#46484d",
+                        "surface-bright": "#292c32",
+                        "on-tertiary-container": "#005f2e",
+                        "surface-container-highest": "#23262c",
+                        "error-container": "#a70138",
+                        "on-primary": "#540061",
+                        "inverse-primary": "#a300bb",
+                        "on-surface": "#f6f6fc",
+                        "on-tertiary-fixed-variant": "#006a34",
+                        "secondary-container": "#006877",
+                        "on-primary-fixed-variant": "#51005d",
+                        "tertiary-container": "#6dfe9c",
+                        "on-error": "#490013",
+                        "on-secondary-fixed-variant": "#005966",
+                        "on-tertiary": "#006833",
+                        "secondary-dim": "#1ad0eb",
+                        "primary-container": "#ed69ff",
+                        "tertiary-fixed": "#6dfe9c",
+                        "tertiary-fixed-dim": "#5def8f",
+                        "primary": "#f382ff",
+                        "secondary-fixed-dim": "#29d6f1",
+                        "on-secondary-fixed": "#003a43",
+                        "secondary": "#3adffa",
+                        "on-primary-container": "#41004c",
+                        "primary-dim": "#ec63ff",
+                        "inverse-on-surface": "#53555a",
+                        "error-dim": "#d73357",
+                        "on-surface-variant": "#aaabb0",
+                        "on-secondary": "#004b56",
+                        "surface-tint": "#f382ff",
+                        "surface-container-low": "#111318",
+                        "on-tertiary-fixed": "#004a22",
+                        "surface-variant": "#23262c",
+                        "surface-container-lowest": "#000000",
+                        "error": "#ff6e84",
+                        "surface": "#0c0e12",
+                        "on-background": "#f6f6fc",
+                        "on-error-container": "#ffb2b9",
+                        "inverse-surface": "#f9f9ff",
+                        "tertiary-dim": "#5def8f",
+                        "outline": "#74757a",
+                        "primary-fixed-dim": "#e451f9",
+                        "surface-container": "#171a1f",
+                        "background": "#0c0e12"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "sans": ["Inter", "system-ui", "sans-serif"],
+                        "headline": ["Inter", "system-ui", "sans-serif"],
+                        "body": ["Inter", "system-ui", "sans-serif"],
+                        "label": ["Inter", "system-ui", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(29, 32, 37, 0.5);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 0.5px solid rgba(255, 255, 255, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #000000;
+            color: #f6f6fc;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        /* iOS Navigation Bar Effects */
+        #nav-bar {
+            transition: background-color 0.3s, border-bottom 0.3s;
+        }
+        .scrolled #nav-bar {
+            background-color: rgba(12, 14, 18, 0.85);
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.15);
+        }
+        .scrolled #small-title {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #small-title {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-32">
+<!-- iOS Navigation Bar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-xl flex flex-col pt-safe px-4 transition-all duration-300" id="nav-bar">
+<div class="flex justify-between items-center h-11">
+<div class="w-10 h-10 rounded-full overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj49lkfFeNnOJbs8prvHYCuAEtaZQFCSQ-LxkaJQFIXYMd8MFqMOGnAhmJV6jteFfwvXrV6H1JksdrEUKjRZDPnbbcNB81keYOZ-XEmlpGdU2W_Vap0Kom15EBig2vpXZ15DBzSyxiW6nEtHC0FK5YnbQAdvauv_E8n0F0VYTweK3wlAF3T8XQQXpxugnGz3Xxa66JrhmvfdxnTOK2zuuUeasaAstiJpaFbE-dH8WnYTQ-Pz-KgqdOUI79W_Ry4kNKMoqGO-HrZqXW"/>
+</div>
+<div class="absolute left-1/2 -translate-x-1/2 font-semibold text-base" id="small-title">Dashboard</div>
+<div class="flex items-center gap-4">
+<button class="text-primary active:opacity-50">
+<span class="material-symbols-outlined text-[28px]" data-icon="add">add</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-16 px-4 max-w-5xl mx-auto">
+<!-- Large iOS Title -->
+<section class="py-4" id="large-title-container">
+<h1 class="text-[34px] font-extrabold tracking-tight text-white px-1">Dashboard</h1>
+</section>
+<!-- Summary Header (Simplified iOS Style) -->
+<section class="mb-8 px-1">
+<div class="glass-card rounded-2xl p-5 relative overflow-hidden">
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-primary/20 blur-3xl rounded-full"></div>
+<p class="text-on-surface-variant text-xs font-semibold uppercase tracking-wider mb-1">Portfolio Overview</p>
+<div class="flex items-baseline gap-2">
+<span class="text-4xl font-bold text-white tracking-tighter">$145.50</span>
+<span class="text-sm font-medium text-tertiary">Owed to you</span>
+</div>
+</div>
+</section>
+<!-- Group List (Standard iOS List Style with Cards) -->
+<div class="space-y-4">
+<!-- Group Card: Roommates 2026 -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-4 active:bg-white/10 transition-colors">
+<div class="flex -space-x-4">
+<img alt="Roommates" class="w-12 h-12 rounded-full border-2 border-surface object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsyjR0DBBXRSK7mgniiTDRnzuOqrdJTA85SEmlqVxDjJrLucf3D1g2W0M2BA2g3HcRbOHbiftu6xsw4HydFpU0KpPZCZ5OnZvQOnCWDARIiNWm0B09bqdE5xoR4wCOX6nG0sUNzyUOc2GDNWLWIZctVNGfhh6wg-jnh9hvW1Fti_SzAU5M6cSQrGZN2K7ekuzzYrUvp1XxxDTOCRmVM1n2zJ4JDyNrzhtMlX9KDdaAwGaa4lbu6_88Ffk3ZFJzzn4QYI5ZPSZu0tRk"/>
+<img alt="Roommates" class="w-12 h-12 rounded-full border-2 border-surface object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnrufIlUfJ1HImueeJPdnY8Ap5GVuDukvIRNaoxjSoTnOVrDFT1YMWT_-jo3Znb5Vi7Ga3k6zMJoKcIMJi3lgzZSPdQapEJqw7Ba88EwuMWpiB4bxxev39dNtLDv0OIY58atNmPdxi5um3cH_aseE-9RgCL64ZcGha2jc8OVgvA98taTf44Esutd-VTHm3oxciQDqDtPPzQbAcda1-J91_NRkz6GOMZD8tcUSOPhKJTXM6t3k8phb8Pv1_abI5CTQlzyns73YNzCQn"/>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="text-lg font-semibold text-white truncate">Roommates 2026</h3>
+<p class="text-sm text-on-surface-variant">3 Pending Transactions</p>
+</div>
+<div class="text-right">
+<span class="block text-lg font-bold text-tertiary">$84.20</span>
+<span class="text-[10px] text-slate-500 uppercase font-bold">Owed</span>
+</div>
+<span class="material-symbols-outlined text-slate-500 text-xl" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Group Card: Spring Break Trip -->
+<div class="glass-card rounded-2xl p-4 flex items-center gap-4 active:bg-white/10 transition-colors">
+<div class="flex -space-x-4">
+<img alt="Trip" class="w-12 h-12 rounded-full border-2 border-surface object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0gRpowUQuaixFa55h-STkHi1_s1TfOWagNPntvFAB2W7tgclszkF8vLjguDoK7rLu1qb6T344Bv8DYZF4UGfB9JHRPRfTO0O6-tJrMd1I2Fzdc4nzKMuTfjYW0ja2I0j2JpKWMz6cMsvxp5jwdXgMB-yZJdN9Tz50ig9gLmqvpyL90AVSEiGjE7N8SLChpO4yv0-_iNyIWwEFJnD7S3W5SsqbVhIpxTrX5ay2HOou6F77S96q9H8Y8YKKB0cj3w236u7idQjKBVEi"/>
+<img alt="Trip" class="w-12 h-12 rounded-full border-2 border-surface object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDltp0KsQelWEiMnrJ66NVnsODOi8bo_4061A3_V955JivKDp0h00J7KvV6vTQmxsN2peF97bq2RkLAQVDH57IhxXMIDAExGS1zQpkpxqxpalt5ULd9ODgCntxKz2YKihZGnOkkLr_Iu6NgL8pK-j_bjhBWJR_b0QLYPYSotXRkWhNlMRzN3RGrKBVp1h7GHjzSN5YcUaD2MLcVNnmI3Ddq8oAlmi7UbX9PE0PQLz191AcLYtAyIih6yHAU1eXCuKoIK599jVUsYxOH"/>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="text-lg font-semibold text-white truncate">Spring Break Trip</h3>
+<p class="text-sm text-on-surface-variant">Settled last week</p>
+</div>
+<div class="text-right">
+<span class="block text-lg font-bold text-primary">$61.30</span>
+<span class="text-[10px] text-slate-500 uppercase font-bold">Owed</span>
+</div>
+<span class="material-symbols-outlined text-slate-500 text-xl" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<!-- Recent Activity Section -->
+<section class="mt-12 mb-8">
+<div class="flex items-center justify-between mb-4 px-1">
+<h2 class="text-xl font-bold text-white">Recent Activity</h2>
+<button class="text-primary text-sm font-semibold hover:opacity-70">See All</button>
+</div>
+<div class="glass-card rounded-2xl divide-y divide-white/5 overflow-hidden">
+<!-- Activity Item -->
+<div class="flex items-center gap-3 p-4 active:bg-white/5 transition-colors">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-xl" data-icon="check_circle">check_circle</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-medium text-on-surface">Alex paid for <span class="text-secondary">Sushi Dinner</span></p>
+<p class="text-[11px] text-on-surface-variant uppercase tracking-wide font-bold">2 hours ago</p>
+</div>
+<div class="text-right">
+<span class="text-base font-bold text-tertiary">+$24.00</span>
+</div>
+</div>
+<!-- Activity Item -->
+<div class="flex items-center gap-3 p-4 active:bg-white/5 transition-colors">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="pending">pending</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-medium text-on-surface">Jordan added <span class="text-primary">Electric Bill</span></p>
+<p class="text-[11px] text-on-surface-variant uppercase tracking-wide font-bold">Yesterday</p>
+</div>
+<div class="text-right">
+<span class="text-base font-bold text-error-dim">-$45.20</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- iOS Bottom Tab Bar -->
+<nav class="fixed bottom-0 left-0 w-full px-1 pb-8 pt-2 bg-black/60 backdrop-blur-2xl z-50 border-t border-white/10 flex justify-around items-center">
+<a class="flex flex-col items-center justify-center text-primary px-4 py-1" href="#">
+<span class="material-symbols-outlined text-[26px] fill-1" data-icon="dashboard">dashboard</span>
+<span class="text-[10px] font-medium mt-0.5">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 px-4 py-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[26px]" data-icon="group">group</span>
+<span class="text-[10px] font-medium mt-0.5">Groups</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 px-4 py-1 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[26px]" data-icon="person">person</span>
+<span class="text-[10px] font-medium mt-0.5">Profile</span>
+</a>
+</nav>
+<script>
+        // Simple scroll handling for iOS-style nav bar
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY;
+            const threshold = 40;
+            const nav = document.body;
+            
+            if (scrollPos > threshold) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            
+            // Adjust opacity of large title based on scroll
+            const largeTitle = document.getElementById('large-title-container');
+            if (largeTitle) {
+                const opacity = Math.max(0, 1 - (scrollPos / 60));
+                largeTitle.style.opacity = opacity;
+            }
+        });
+    </script>
+</body></html>

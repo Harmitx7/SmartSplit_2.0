@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ╔══════════════════════════════════════════════════════════════╗
+    ║  SmartSplit — Ethereal Ledger Theme System                   ║
+    ║  Glassmorphism = Android 12+ RenderEffect blur + fallback    ║
+    ╚══════════════════════════════════════════════════════════════╝
+-->
+<resources>
+
+    <!-- ════════════════════════════════════════════════════════════
+         Base Application Theme
+         ════════════════════════════════════════════════════════════ -->
+    <style name="Theme.SmartSplit" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Primary: The Glow -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
+
+        <!-- Secondary: The Fluidity -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
+
+        <!-- Tertiary: The Success -->
+        <item name="colorTertiary">@color/tertiary</item>
+        <item name="colorOnTertiary">@color/on_tertiary</item>
+        <item name="colorTertiaryContainer">@color/tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/on_tertiary_container</item>
+
+        <!-- Surface: Deep Space -->
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorSurfaceContainerHigh">@color/surface_container_high</item>
+        <item name="colorSurfaceContainerHighest">@color/surface_container_highest</item>
+
+        <!-- Background -->
+        <item name="android:colorBackground">@color/surface</item>
+
+        <!-- Error -->
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/on_error</item>
+
+        <!-- Outline -->
+        <item name="colorOutline">@color/outline</item>
+        <item name="colorOutlineVariant">@color/outline_variant</item>
+
+        <!-- Shapes — XL roundness throughout (Ethereal Ledger = 1.5rem+ rounding) -->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.SmartSplit.Small</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.SmartSplit.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.SmartSplit.Large</item>
+
+        <!-- Status bar: transparent → deep space color behind -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/surface</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
+        <!-- Typography overrides — we use ttf fonts in res/font -->
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+    </style>
+
+    <!-- ════════════════════════════════════════════════════════════
+         Shape System
+         ════════════════════════════════════════════════════════════ -->
+    <style name="ShapeAppearance.SmartSplit.Small" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <style name="ShapeAppearance.SmartSplit.Medium" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerRadius">20dp</item>
+    </style>
+
+    <style name="ShapeAppearance.SmartSplit.Large" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerRadius">28dp</item>
+    </style>
+
+    <!-- ════════════════════════════════════════════════════════════
+         Typography Styles
+         ════════════════════════════════════════════════════════════ -->
+    <style name="TextAppearance.SmartSplit.Display" parent="TextAppearance.Material3.DisplayLarge">
+        <item name="android:fontFamily">@font/space_grotesk</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">48sp</item>
+        <item name="android:letterSpacing">-0.025</item>
+    </style>
+
+    <style name="TextAppearance.SmartSplit.Headline" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:fontFamily">@font/space_grotesk</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.SmartSplit.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+    </style>
+
+    <style name="TextAppearance.SmartSplit.Label" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.12</item>
+    </style>
+
+    <!-- ════════════════════════════════════════════════════════════
+         Glass Card Style (for MaterialCardView)
+         ════════════════════════════════════════════════════════════ -->
+    <style name="Widget.SmartSplit.GlassCard" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">@color/glass_surface_40</item>
+        <item name="cardCornerRadius">24dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeColor">@color/outline_variant</item>
+        <item name="strokeWidth">0.5dp</item>
+    </style>
+
+    <!-- ════════════════════════════════════════════════════════════
+         Primary Button — Gradient Glow
+         ════════════════════════════════════════════════════════════ -->
+    <style name="Widget.SmartSplit.Button.Primary" parent="Widget.Material3.Button">
+        <item name="android:fontFamily">@font/space_grotesk</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.08</item>
+        <item name="cornerRadius">50dp</item>
+        <item name="android:minHeight">56dp</item>
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:textColor">@color/on_primary</item>
+    </style>
+
+    <!-- ════════════════════════════════════════════════════════════
+         Input Field Style — Minimalist glass
+         ════════════════════════════════════════════════════════════ -->
+    <style name="Widget.SmartSplit.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@color/glass_surface_60</item>
+        <item name="boxStrokeColor">@color/outline_variant</item>
+        <item name="boxStrokeWidth">0.5dp</item>
+        <item name="boxCornerRadiusBottomEnd">16dp</item>
+        <item name="boxCornerRadiusBottomStart">16dp</item>
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="hintTextColor">@color/primary</item>
+    </style>
+
+    <!-- ════════════════════════════════════════════════════════════
+         Bottom Navigation Style
+         ════════════════════════════════════════════════════════════ -->
+    <style name="Widget.SmartSplit.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@color/glass_nav</item>
+        <item name="itemIconTint">@color/bottom_nav_tint</item>
+        <item name="itemTextColor">@color/bottom_nav_tint</item>
+        <item name="android:fontFamily">@font/plus_jakarta_sans</item>
+        <item name="elevation">0dp</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.SmartSplit.BottomNavigationView.ActiveIndicator</item>
+    </style>
+
+    <style name="Widget.SmartSplit.BottomNavigationView.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/surface_container_highest</item>
+    </style>
+
+    <!-- ════════════════════════════════════════════════════════════
+         Splash / SplashScreen Theme
+         ════════════════════════════════════════════════════════════ -->
+    <style name="Theme.SmartSplit.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/surface</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.SmartSplit</item>
+    </style>
+
+    <!-- ════════════════════════════════════════════════════════════
+         FAB Style — Gradient glow button
+         ════════════════════════════════════════════════════════════ -->
+    <style name="Widget.SmartSplit.FAB" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="backgroundTint">@color/primary</item>
+        <item name="tint">@color/on_primary</item>
+        <item name="elevation">8dp</item>
+    </style>
+
+</resources>
